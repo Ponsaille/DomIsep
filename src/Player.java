@@ -12,14 +12,14 @@ public class Player {
   //
 
   private Side[][] kingdom = new Side[9][9];
-  private Color color;
-  private int[] kingsPositions;
+  private int[] kingsPositions = new int[2];
   private boolean canPlay;
-  
+   
   //
   // Constructors
   //
-  public Player () { };
+  public Player (int id) {
+  };
   
   //
   // Methods
@@ -28,15 +28,7 @@ public class Player {
 
   //
   // Accessor methods
-  //
-
-  /**
-   * Set the value of kingdom
-   * @param newVar the new value of kingdom
-   */
-  private void setKingdom (Side[][] newVar) {
-    kingdom = newVar;
-  }
+  //}
 
   /**
    * Get the value of kingdom
@@ -47,27 +39,11 @@ public class Player {
   }
 
   /**
-   * Set the value of color
-   * @param newVar the new value of color
-   */
-  private void setColor (Color newVar) {
-    color = newVar;
-  }
-
-  /**
-   * Get the value of color
-   * @return the value of color
-   */
-  private Color getColor () {
-    return color;
-  }
-
-  /**
    * Set the value of kingsPositions
    * @param newVar the new value of kingsPositions
    */
-  private void setKingsPositions (int[] newVar) {
-    kingsPositions = newVar;
+  private void setKingsPositions (int id, int pos) {
+    kingsPositions[id] = pos;
   }
 
   /**
@@ -101,7 +77,7 @@ public class Player {
   /**
    * @return       int
    */
-  public int getPoints()
+  private int getPoints()
   {
   }
 
@@ -109,7 +85,7 @@ public class Player {
   /**
    * @return       Side[9][9]
    */
-  public Side[][] getBoard()
+  private Side[][] getBoard()
   {
   }
 
@@ -118,8 +94,18 @@ public class Player {
    * @param        leftPosition
    * @param        rightPosition
    */
-  public void placeDomino(int[] leftPosition, int[] rightPosition)
+  private void placeDomino(int[] leftPosition, int[] rightPosition, Side leftSide, Side rightSide)
   {
+    kingdom[leftPosition] = leftSide;
+    kingdom[rightPosition] = rightSide;
+  }
+
+  private boolean isGoodPosition(int[] leftPosition, Side leftSide) 
+  {
+    /*if(
+      (kingdom[leftPosition-1] && kingdom[leftPosition-1].type.equals(leftSide.type)) ||
+      (kingdom[leftPosition+1] && kingdom[leftPosition+1].type.equals(leftSide.type))
+    )*/
   }
 
 

@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Class AI
  */
-public class AI extends Player, Player {
+public class AI extends Player {
 
   //
   // Fields

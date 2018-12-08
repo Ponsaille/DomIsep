@@ -123,7 +123,7 @@ public class Middle {
   /**
    * @return       Domino[2][]
    */
-  public Domino[2][] getMiddle()
+  public Domino[][] getMiddle()
   {
   }
 

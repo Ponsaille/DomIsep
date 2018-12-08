@@ -12,17 +12,13 @@ public class Partie {
   //
 
   /**
-   * Indique le nombre de joueurs dans une partie
-   */
-  private int nbPlayer;
-  /**
    * List<Player>
    */
   private List<Player> players = new ArrayList();
   private int round;
   private int playing;
   private Middle middle;
-  private int nbCanPlay = nbPlayer;
+  private int nbCanPlay  = 0;
   
   //
   // Constructors
@@ -39,21 +35,12 @@ public class Partie {
   //
 
   /**
-   * Set the value of nbPlayer
-   * Indique le nombre de joueurs dans une partie
-   * @param newVar the new value of nbPlayer
-   */
-  private void setNbPlayer (int newVar) {
-    nbPlayer = newVar;
-  }
-
-  /**
    * Get the value of nbPlayer
    * Indique le nombre de joueurs dans une partie
    * @return the value of nbPlayer
    */
-  private int getNbPlayer () {
-    return nbPlayer;
+  public int getNbPlayer () {
+    return players.size();
   }
 
   /**
@@ -70,7 +57,7 @@ public class Partie {
    * List<Player>
    * @return the value of players
    */
-  private List<Player> getPlayers () {
+  public List<Player> getPlayers () {
     return players;
   }
 
@@ -153,7 +140,11 @@ public class Partie {
    */
   public void newPlayer()
   {
-    players.add(new Player());
+    if(players.size() < 5) {
+      players.add(new Player(players.size()));
+    } else {
+      System.err.println("The maximum players number has alredy been reached");
+    }
   }
 
 

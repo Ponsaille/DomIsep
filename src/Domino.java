@@ -125,21 +125,6 @@ public class Domino {
   // Other methods
   //
 
-  /**
-   * @return       int[2]
-   */
-  public int[2] getLeftPosition()
-  {
-  }
-
-
-  /**
-   * @return       int[2]
-   */
-  public int[2] getRightPosition()
-  {
-  }
-
 
   /**
    * @param        leftSide
@@ -150,13 +135,6 @@ public class Domino {
   {
   }
 
-
-  /**
-   * @return       int
-   */
-  public int getPower()
-  {
-  }
 
 
 }
