@@ -26,7 +26,19 @@ public class Domino {
   //
   // Constructors
   //
-  public Domino () { };
+  /**
+   * @param        leftSide
+   * @param        rightSide
+   * @param        power
+   */
+  public Domino(Side leftSide, Side rightSide, int power)
+  {
+    this.leftSide = leftSide;
+    this.rightSide = rightSide;
+    this.power = power;
+    this.angle = 0;
+    this.leftPosition = 0;
+  }
   
   //
   // Methods
@@ -49,7 +61,7 @@ public class Domino {
    * Get the value of power
    * @return the value of power
    */
-  private int getPower () {
+  public int getPower () {
     return power;
   }
 
@@ -65,7 +77,7 @@ public class Domino {
    * Get the value of leftSide
    * @return the value of leftSide
    */
-  private Side getLeftSide () {
+  public Side getLeftSide () {
     return leftSide;
   }
 
@@ -81,7 +93,7 @@ public class Domino {
    * Get the value of rightSide
    * @return the value of rightSide
    */
-  private Side getRightSide () {
+  public Side getRightSide () {
     return rightSide;
   }
 
@@ -90,7 +102,7 @@ public class Domino {
    * Pour la periode de placement
    * @param newVar the new value of leftPosition
    */
-  private void setLeftPosition (int newVar) {
+  public void setLeftPosition (int newVar) {
     leftPosition = newVar;
   }
 
@@ -99,7 +111,7 @@ public class Domino {
    * Pour la periode de placement
    * @return the value of leftPosition
    */
-  private int getLeftPosition () {
+  public int getLeftPosition () {
     return leftPosition;
   }
 
@@ -108,7 +120,7 @@ public class Domino {
    * Au moment de la position
    * @param newVar the new value of angle
    */
-  private void setAngle (int newVar) {
+  public void setAngle (int newVar) {
     angle = newVar;
   }
 
@@ -117,22 +129,8 @@ public class Domino {
    * Au moment de la position
    * @return the value of angle
    */
-  private int getAngle () {
+  public int getAngle () {
     return angle;
-  }
-
-  //
-  // Other methods
-  //
-
-
-  /**
-   * @param        leftSide
-   * @param        rightSide
-   * @param        power
-   */
-  public void Domino(Side leftSide, Side rightSide, int power)
-  {
   }
 
 
