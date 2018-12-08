@@ -140,7 +140,7 @@ public class Partie {
    */
   public void newPlayer()
   {
-    if(players.size() < 5) {
+    if(players.size() < 4) {
       players.add(new Player(players.size()));
     } else {
       System.err.println("The maximum players number has alredy been reached");
