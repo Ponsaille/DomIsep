@@ -15,7 +15,10 @@ public class Side {
   //
   // Constructors
   //
-  public Side () { };
+  public Side (String type, int crowns) { 
+    this.type = type;
+    this.crowns = crowns;
+  };
   
   //
   // Methods
@@ -38,7 +41,7 @@ public class Side {
    * Get the value of type
    * @return the value of type
    */
-  private String getType () {
+  public String getType () {
     return type;
   }
 
@@ -54,20 +57,8 @@ public class Side {
    * Get the value of crowns
    * @return the value of crowns
    */
-  private int getCrowns () {
+  public int getCrowns () {
     return crowns;
-  }
-
-  //
-  // Other methods
-  //
-
-  /**
-   * @param        type
-   * @param        crowns
-   */
-  public void Side(String type, int crowns)
-  {
   }
 
 
