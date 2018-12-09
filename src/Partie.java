@@ -157,4 +157,9 @@ public class Partie {
   }
 
 
+  public boolean isPlayable() {
+    return players.size() > 1;
+  }
+
+
 }
