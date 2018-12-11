@@ -34,7 +34,6 @@ public class Pioche {
     this.populate();
     // Mélanger
     Collections.shuffle(dominos);
-    System.out.println(dominos.size());
     // Supprimer ceux qui sont en trop en fonction du nombre de joueur
     switch (nbPlayer) {
       case 2:
@@ -43,8 +42,11 @@ public class Pioche {
       case 3:
         this.removeNDominos(12);
         break;
+      case 4:
+        break;
+      default:
+        System.err.println("Le nombre de joueur n'est pas standart.");
     }
-    System.out.println(dominos.size());
   }
   
   //
@@ -72,14 +74,13 @@ public class Pioche {
       e.printStackTrace();
     } catch (IOException e) {
         e.printStackTrace();
-    } finally {
-      if (br != null) {
-          try {
-              br.close();
-          } catch (IOException e) {
-              e.printStackTrace();
-          }
-      }
+    }
+    if (br != null) {
+        try {
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
   }
 
