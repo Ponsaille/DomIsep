@@ -11,15 +11,32 @@ public class Middle {
   // Fields
   //
 
-  private Domino[] firstColumn;
-  private Domino[] secondColum;
+  private List<Domino> firstColumn;
+  private List<Domino> secondColumn;
   private Pioche pioche;
   private int nbDominos;
   
   //
   // Constructors
   //
-  public Middle () { };
+  public Middle (int nbPlayer) {
+    pioche = new Pioche(nbPlayer);
+    
+    switch(nbPlayer) {
+      case 2:
+      case 4:
+        nbDominos = 4;
+        break;
+      case 3:
+        nbDominos = 3;
+        break;
+      default:
+      System.err.println("Le nombre de joueur n'est pas standart.");
+    }
+
+    firstColumn = new ArrayList<>();
+    secondColumn = new ArrayList<>();
+  };
   
   //
   // Methods
@@ -50,7 +67,7 @@ public class Middle {
    * Set the value of secondColum
    * @param newVar the new value of secondColum
    */
-  private void setSecondColum (Domino[] newVar) {
+  private void setSecondColumn (Domino[] newVar) {
     secondColum = newVar;
   }
 
@@ -58,7 +75,7 @@ public class Middle {
    * Get the value of secondColum
    * @return the value of secondColum
    */
-  private Domino[] getSecondColum () {
+  private Domino[] getSecondColumn () {
     return secondColum;
   }
 
@@ -100,8 +117,19 @@ public class Middle {
 
   /**
    */
-  public void pick()
-  {
+  public void pick() {
+    // Moving second column to the first one
+    secondColumn = firstColumn;
+
+    // Populating the new second column
+    for(int i = 0; i<nbDominos; i++) {
+      secondColumn.add(pioche.pick());
+    } 
+
+    Iterator<Domino> iterator = secondColumn.iterator();
+    while (iterator.hasNext()) {
+      System.out.println(iterator.next().getPower());
+    }
   }
 
 
@@ -109,14 +137,26 @@ public class Middle {
    */
   public void sort()
   {
-  }
+    List<Domino> temp = new ArrayList<>();
+    Iterator<Domino> secondIterator = secondColumn.iterator();
+    while (secondIterator.hasNext()) {
+      Domino next = secondIterator.next();
+      Iterator<Domino> tempIterator = temp.iterator();
+      int i = 0;
+      while (tempIterator.hasNext() && tempIterator.next().getPower() < next.getPower()) {
+        i = i+1;
+      }
+      temp.add(i, next);
+    }
 
+    secondColumn = temp;
 
-  /**
-   * @param        nbPlayer
-   */
-  public void Middle(int nbPlayer)
-  {
+    System.out.println("End sort");
+
+    Iterator<Domino> iterator = secondColumn.iterator();
+    while (iterator.hasNext()) {
+      System.out.println(iterator.next().getPower());
+    }
   }
 
 
