@@ -119,12 +119,21 @@ public class Middle {
    */
   public void pick() {
     // Moving second column to the first one
-    secondColumn = firstColumn;
+    firstColumn = new ArrayList<>(secondColumn);
 
     // Populating the new second column
     for(int i = 0; i<nbDominos; i++) {
       secondColumn.add(pioche.pick());
     } 
+
+    System.out.println("First column");
+
+    Iterator<Domino> iterator1 = firstColumn.iterator();
+    while (iterator1.hasNext()) {
+      System.out.println(iterator1.next().getPower());
+    }
+
+    System.out.println("Second colomun");
 
     Iterator<Domino> iterator = secondColumn.iterator();
     while (iterator.hasNext()) {
@@ -151,7 +160,7 @@ public class Middle {
 
     secondColumn = temp;
 
-    System.out.println("End sort");
+    System.out.println("Sorted :");
 
     Iterator<Domino> iterator = secondColumn.iterator();
     while (iterator.hasNext()) {
