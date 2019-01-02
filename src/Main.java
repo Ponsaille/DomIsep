@@ -3,9 +3,7 @@ public class Main {
         Partie partie = new Partie();
         partie.newPlayer();
         partie.newPlayer();
-        partie.newPlayer();
-        partie.newPlayer();
         System.out.println(partie.getPlayers());
-        Pioche pioche = new Pioche(3);
+        partie.run();
     }
 }

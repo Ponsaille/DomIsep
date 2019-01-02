@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.util.*;
 
 
@@ -11,14 +12,16 @@ public class Player {
   // Fields
   //
 
-  private Side[][] kingdom = new Side[9][9];
-  private int[] kingsPositions = new int[2];
+  private Side[][] kingdom;
+  private List<Color> kings;
   private boolean canPlay;
    
   //
   // Constructors
   //
   public Player (int id) {
+    this.kingdom = new Side[9][9];
+    this.kings = new ArrayList<>();
   };
   
   //
@@ -39,22 +42,6 @@ public class Player {
   }
 
   /**
-   * Set the value of kingsPositions
-   * @param newVar the new value of kingsPositions
-   */
-  private void setKingsPositions (int id, int pos) {
-    kingsPositions[id] = pos;
-  }
-
-  /**
-   * Get the value of kingsPositions
-   * @return the value of kingsPositions
-   */
-  private int[] getKingsPositions () {
-    return kingsPositions;
-  }
-
-  /**
    * Set the value of canPlay
    * @param newVar the new value of canPlay
    */
@@ -68,6 +55,10 @@ public class Player {
    */
   private boolean getCanPlay () {
     return canPlay;
+  }
+
+  public List<Color> getKings () {
+    return this.kings;
   }
 
   //
@@ -108,13 +99,8 @@ public class Player {
     )*/
   }
 
-
-  /**
-   * @param        color
-   * @param        nbPlayer
-   */
-  public void Player(Color color, int nbPlayer)
-  {
+  public void addKing(Color king) {
+    this.kings.add(king);
   }
 
 

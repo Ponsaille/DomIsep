@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.util.*;
 
 
@@ -19,6 +20,7 @@ public class Partie {
   private int playing;
   private Middle middle;
   private int nbCanPlay  = 0;
+  private Scanner scanner = new Scanner(System.in);
   
   //
   // Constructors
@@ -161,5 +163,55 @@ public class Partie {
     return players.size() > 1;
   }
 
+  public void run() {
+    this.middle = new Middle(players.size());
+    this.middle.pick();
+    this.middle.sort();
 
+    // Setting the number of kings per player
+    int nbKingsPerPlayer;
+    switch(players.size()) {
+      case 2:
+        nbKingsPerPlayer = 2;
+        break;
+      case 3:
+      case 4:
+        nbKingsPerPlayer = 1;
+        break;
+      default:
+        System.err.println("Le nombre de joueur n'est pas standart");
+        return;
+    }
+    // Pour éviter d'avoir 2 fois la même couleur
+    Color[] disponnibleColors = {Color.BLACK,Color.BLUE,Color.RED,Color.GREEN};
+    disponnibleColors = Arrays.copyOfRange(disponnibleColors, 0, this.players.size()*nbKingsPerPlayer);
+    // Ajoute les rois au milieu
+    this.middle.addKings(disponnibleColors);
+    // Les associes à un joueur
+    for(int i = 0; i < this.players.size()*nbKingsPerPlayer; i++) {
+      this.players.get(i%this.players.size()).addKing(disponnibleColors[i]);
+    }
+
+    //Test
+    Iterator<Player> playersIterator = players.iterator();
+    while(playersIterator.hasNext()) {
+      System.out.println(playersIterator.next().getKings());
+    }
+
+    this.middle.pick();
+    
+    //Reset iterator
+    playersIterator = players.iterator();
+    int playerId = 0;
+    while(playersIterator.hasNext()) {
+      Player actualPlayer = playersIterator.next();
+      List<Color> kings = actualPlayer.getKings();
+      for(int i = 0; i<kings.size(); i++) {
+        System.out.println("Votre roi " + kings.get(i).getRGB());
+        System.out.println("Joueur " + (playerId+1) + " sur quel domino voulez-vous vous placer votre roi numero " + (i+1));
+        this.middle.moveKing(kings.get(i), scanner.nextInt());
+      }
+      playerId++;
+    }
+  }
 }

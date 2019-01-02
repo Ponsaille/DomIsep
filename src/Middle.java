@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.util.*;
 
 
@@ -15,6 +16,8 @@ public class Middle {
   private List<Domino> secondColumn;
   private Pioche pioche;
   private int nbDominos;
+  private Color[] kingsFirstPositions;
+  private Color[] kingsSecondPositions;
   
   //
   // Constructors
@@ -36,6 +39,8 @@ public class Middle {
 
     firstColumn = new ArrayList<>();
     secondColumn = new ArrayList<>();
+    kingsFirstPositions = new Color[nbDominos];
+    kingsSecondPositions = new Color[nbDominos];
   };
   
   //
@@ -121,6 +126,10 @@ public class Middle {
     // Moving second column to the first one
     firstColumn = new ArrayList<>(secondColumn);
 
+    // Moving the kings to the first row
+    kingsFirstPositions = kingsSecondPositions.clone();
+    kingsSecondPositions = new Color[this.nbDominos];
+
     // Populating the new second column
     for(int i = 0; i<nbDominos; i++) {
       secondColumn.add(pioche.pick());
@@ -174,6 +183,24 @@ public class Middle {
    */
   public Domino[][] getMiddle()
   {
+  }
+
+  public void addKings(Color[] kings) {
+    this.kingsSecondPositions = kings;
+  }
+
+
+  /**
+   * @return Domino
+   */
+  public Domino moveKing(Color king, int nextPosition) {
+    int position = Arrays.asList(this.kingsFirstPositions).indexOf(king);
+    System.out.println(king);
+    System.out.println(Arrays.toString(this.kingsSecondPositions));
+    System.out.println(position);
+    this.kingsFirstPositions[position] = null;
+    this.kingsSecondPositions[nextPosition] = king;
+    return this.firstColumn.get(position);
   }
 
 
