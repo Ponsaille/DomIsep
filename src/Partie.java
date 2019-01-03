@@ -185,23 +185,22 @@ public class Partie {
     // Pour éviter d'avoir 2 fois la même couleur
     Color[] disponnibleColors = {Color.BLACK,Color.BLUE,Color.RED,Color.GREEN};
     disponnibleColors = Arrays.copyOfRange(disponnibleColors, 0, this.players.size()*nbKingsPerPlayer);
-    // Ajoute les rois au milieu
-    this.middle.addKings(disponnibleColors);
-    // Les associes à un joueur
-    for(int i = 0; i < this.players.size()*nbKingsPerPlayer; i++) {
-      this.players.get(i%this.players.size()).addKing(disponnibleColors[i]);
-    }
 
-    //Test
-    Iterator<Player> playersIterator = players.iterator();
-    while(playersIterator.hasNext()) {
-      System.out.println(playersIterator.next().getKings());
+    // Génération des rois
+    King[] kings = new King[this.players.size()*nbKingsPerPlayer];
+    for(int i = 0; i < kings.length; i++) {
+      kings[i] = new King(disponnibleColors[i], this.players.get(i%this.players.size()));
     }
+    // Ajoute les rois au milieu
+    this.middle.addKings(kings);
 
     this.middle.pick();
+
+    this.middle.kingsRound();
     
     //Reset iterator
-    playersIterator = players.iterator();
+    //playersIterator = players.iterator();
+    /*
     int playerId = 0;
     while(playersIterator.hasNext()) {
       Player actualPlayer = playersIterator.next();
@@ -212,6 +211,6 @@ public class Partie {
         this.middle.moveKing(kings.get(i), scanner.nextInt());
       }
       playerId++;
-    }
+    }*/
   }
 }

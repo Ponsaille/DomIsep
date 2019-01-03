@@ -13,7 +13,6 @@ public class Player {
   //
 
   private Side[][] kingdom;
-  private List<Color> kings;
   private boolean canPlay;
    
   //
@@ -21,7 +20,6 @@ public class Player {
   //
   public Player (int id) {
     this.kingdom = new Side[9][9];
-    this.kings = new ArrayList<>();
   };
   
   //
@@ -55,10 +53,6 @@ public class Player {
    */
   private boolean getCanPlay () {
     return canPlay;
-  }
-
-  public List<Color> getKings () {
-    return this.kings;
   }
 
   //
@@ -97,10 +91,6 @@ public class Player {
       (kingdom[leftPosition-1] && kingdom[leftPosition-1].type.equals(leftSide.type)) ||
       (kingdom[leftPosition+1] && kingdom[leftPosition+1].type.equals(leftSide.type))
     )*/
-  }
-
-  public void addKing(Color king) {
-    this.kings.add(king);
   }
 
 

@@ -1,4 +1,4 @@
-
+import java.awt.Color;
 
 /**
  * Class King
@@ -8,12 +8,16 @@ public class King {
   //
   // Fields
   //
-
+  private Color color;
+  private Player player;
   
   //
   // Constructors
   //
-  public King () { };
+  public King (Color color, Player player) {
+    this.color = color;
+    this.player = player;
+  };
   
   //
   // Methods
@@ -23,6 +27,13 @@ public class King {
   //
   // Accessor methods
   //
+  public Color getColor () {
+    return this.color;
+  }
+
+  public Player getPlayer() {
+    return this.player;
+  }
 
   //
   // Other methods

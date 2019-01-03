@@ -16,8 +16,8 @@ public class Middle {
   private List<Domino> secondColumn;
   private Pioche pioche;
   private int nbDominos;
-  private Color[] kingsFirstPositions;
-  private Color[] kingsSecondPositions;
+  private King[] kingsFirstPositions;
+  private King[] kingsSecondPositions;
   
   //
   // Constructors
@@ -39,8 +39,8 @@ public class Middle {
 
     firstColumn = new ArrayList<>();
     secondColumn = new ArrayList<>();
-    kingsFirstPositions = new Color[nbDominos];
-    kingsSecondPositions = new Color[nbDominos];
+    kingsFirstPositions = new King[nbDominos];
+    kingsSecondPositions = new King[nbDominos];
   };
   
   //
@@ -128,7 +128,7 @@ public class Middle {
 
     // Moving the kings to the first row
     kingsFirstPositions = kingsSecondPositions.clone();
-    kingsSecondPositions = new Color[this.nbDominos];
+    kingsSecondPositions = new King[this.nbDominos];
 
     // Populating the new second column
     for(int i = 0; i<nbDominos; i++) {
@@ -185,7 +185,7 @@ public class Middle {
   {
   }
 
-  public void addKings(Color[] kings) {
+  public void addKings(King[] kings) {
     this.kingsSecondPositions = kings;
   }
 
@@ -193,14 +193,34 @@ public class Middle {
   /**
    * @return Domino
    */
-  public Domino moveKing(Color king, int nextPosition) {
+  public Domino moveKing(King king, int nextPosition) {
+    if(nextPosition >= this.kingsFirstPositions.length || this.kingsSecondPositions[nextPosition] != null) {
+      return null;
+    }
     int position = Arrays.asList(this.kingsFirstPositions).indexOf(king);
-    System.out.println(king);
-    System.out.println(Arrays.toString(this.kingsSecondPositions));
-    System.out.println(position);
     this.kingsFirstPositions[position] = null;
     this.kingsSecondPositions[nextPosition] = king;
+    System.out.println(this.firstColumn.get(position));
     return this.firstColumn.get(position);
+  }
+
+
+  public void kingsRound() {
+    Scanner scanner = new Scanner(System.in);
+    for(int i = 0; i<this.kingsFirstPositions.length; i++) {
+      System.out.println("Votre roi " + this.kingsFirstPositions[i]);
+      Domino domino;
+      do {
+        try {
+          domino = moveKing(this.kingsFirstPositions[i], scanner.nextInt());
+        } catch (InputMismatchException e) {
+          System.out.println("Veuillez entrer un nombre entier");
+          scanner.next();
+          domino = null;
+        }
+      } while(domino == null);
+      System.out.println();
+    }
   }
 
 
