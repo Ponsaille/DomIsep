@@ -187,6 +187,13 @@ public class Middle {
 
   public void addKings(King[] kings) {
     this.kingsSecondPositions = kings;
+    // Mélange les rois pour le premier round.
+    for(int i = 0; i < this.kingsSecondPositions.length; i++) {
+      int randVal = i + (int) (Math.random()*(this.kingsSecondPositions.length-i));
+      King element = this.kingsSecondPositions[randVal];
+      this.kingsSecondPositions[randVal] = this.kingsSecondPositions[i];
+      this.kingsSecondPositions[i] = element;
+    }
   }
 
 
