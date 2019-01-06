@@ -15,7 +15,9 @@ public class AI extends Player {
   //
   // Constructors
   //
-  public AI () { };
+  public AI (int id) {
+    super(id);
+  };
   
   //
   // Methods

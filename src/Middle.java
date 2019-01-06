@@ -53,35 +53,19 @@ public class Middle {
   //
 
   /**
-   * Set the value of firstColumn
-   * @param newVar the new value of firstColumn
-   */
-  private void setFirstColumn (Domino[] newVar) {
-    firstColumn = newVar;
-  }
-
-  /**
    * Get the value of firstColumn
    * @return the value of firstColumn
    */
-  private Domino[] getFirstColumn () {
+  private List<Domino> getFirstColumn () {
     return firstColumn;
-  }
-
-  /**
-   * Set the value of secondColum
-   * @param newVar the new value of secondColum
-   */
-  private void setSecondColumn (Domino[] newVar) {
-    secondColum = newVar;
   }
 
   /**
    * Get the value of secondColum
    * @return the value of secondColum
    */
-  private Domino[] getSecondColumn () {
-    return secondColum;
+  private List<Domino> getSecondColumn () {
+    return secondColumn;
   }
 
   /**
@@ -183,6 +167,7 @@ public class Middle {
    */
   public Domino[][] getMiddle()
   {
+    return new Domino[2][4];
   }
 
   public void addKings(King[] kings) {
@@ -215,17 +200,19 @@ public class Middle {
   public void kingsRound() {
     Scanner scanner = new Scanner(System.in);
     for(int i = 0; i<this.kingsFirstPositions.length; i++) {
-      System.out.println("Votre roi " + this.kingsFirstPositions[i]);
+      King actualKing = this.kingsFirstPositions[i];
+      System.out.println("Votre roi " + actualKing);
       Domino domino;
       do {
         try {
-          domino = moveKing(this.kingsFirstPositions[i], scanner.nextInt());
+          domino = moveKing(actualKing, scanner.nextInt());
         } catch (InputMismatchException e) {
           System.out.println("Veuillez entrer un nombre entier");
           scanner.next();
           domino = null;
         }
       } while(domino == null);
+      actualKing.getPlayer().moveDomino(domino);
       System.out.println();
     }
   }

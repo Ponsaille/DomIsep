@@ -9,7 +9,7 @@ public class Board {
   // Fields
   //
 
-  private List<Dominos> dominos;
+  private List<Domino> dominos;
   
   //
   // Constructors
@@ -29,7 +29,7 @@ public class Board {
    * Set the value of dominos
    * @param newVar the new value of dominos
    */
-  private void setDominos (List<Dominos> newVar) {
+  private void setDominos (List<Domino> newVar) {
     dominos = newVar;
   }
 
@@ -37,7 +37,7 @@ public class Board {
    * Get the value of dominos
    * @return the value of dominos
    */
-  private List<Dominos> getDominos () {
+  private List<Domino> getDominos () {
     return dominos;
   }
 

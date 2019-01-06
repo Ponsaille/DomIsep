@@ -46,15 +46,6 @@ public class Partie {
   }
 
   /**
-   * Set the value of players
-   * List<Player>
-   * @param newVar the new value of players
-   */
-  private void setPlayers (Player[] newVar) {
-    players = newVar;
-  }
-
-  /**
    * Get the value of players
    * List<Player>
    * @return the value of players
