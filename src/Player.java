@@ -14,12 +14,17 @@ public class Player {
 
   private Side[][] kingdom;
   private boolean canPlay;
+  private int mostLeftPosition = 5;
+  private int mostRightPosition = 5;
+  private int highestPosition = 5;
+  private int lowestPosition = 5;
    
   //
   // Constructors
   //
   public Player (int id) {
     this.kingdom = new Side[9][9];
+    this.kingdom[5][5] = new Side("Château", 0);
   };
   
   //
@@ -116,19 +121,62 @@ public class Player {
         break;
     }
 
-    // Vérification du placement à réaliser
-    System.out.println(domino);
-    this.kingdom[leftPosition[0]][leftPosition[1]] = domino.getLeftSide();
-    this.kingdom[rightPosition[0]][rightPosition[1]] = domino.getRightSide();
+    if(isSideInside(leftPosition)
+            && isSideInside(rightPosition)
+            && isEmptyCell(leftPosition)
+            && isEmptyCell(rightPosition)) {
+      this.kingdom[leftPosition[0]][leftPosition[1]] = domino.getLeftSide();
+      this.kingdom[rightPosition[0]][rightPosition[1]] = domino.getRightSide();
+
+      this.updateExtremums(leftPosition);
+      this.updateExtremums(rightPosition);
+    } else {
+      System.out.println("Postion invalide");
+      this.moveDomino(domino);
+    }
   }
 
-  private boolean isGoodPosition(Domino domino, int[] leftPosition, Side leftSide) 
+  private boolean isEmptyCell(int[] position) {
+    if(this.kingdom[position[0]][position[1]] == null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private boolean isGoodPosition(Domino domino, int[] leftPosition, int[] rightPosition, King king)
   {
-    /*if(
-      (kingdom[leftPosition-1] && kingdom[leftPosition-1].type.equals(leftSide.type)) ||
-      (kingdom[leftPosition+1] && kingdom[leftPosition+1].type.equals(leftSide.type))
-    )*/
+    // Verifier si le cote droit est dans la bonne range
+
     return true;
+  }
+
+  private boolean isSideInside(int[] position) {
+    if(position[0] > 8 || position[1] > 8 || position[0] < 0 || position[1] < 0)  {
+      return  false;
+    }
+
+    //Editer les nouveaux extremums
+    int mostLeftPosition = position[1] < this.mostLeftPosition ? position[1] : this.mostLeftPosition;
+    int mostRightPositon = position[1] > this.mostRightPosition ? position[1] : this.mostRightPosition;
+    int highestPosition = position[0] < this.highestPosition ? position[0] : this.highestPosition;
+    int lowestPosition = position[0] > this.lowestPosition ? position[0] : this.lowestPosition;
+
+    int width = mostRightPositon - mostLeftPosition;
+    int heigh = lowestPosition - highestPosition;
+
+    if(width > 5 || heigh > 5) {
+      return false;
+    }
+
+    return true;
+  }
+
+  private void updateExtremums(int[] position) {
+      this.mostLeftPosition = position[1] < this.mostLeftPosition ? position[1] : this.mostLeftPosition;
+      this.mostRightPosition = position[1] > this.mostRightPosition ? position[1] : this.mostRightPosition;
+      this.highestPosition = position[0] < this.highestPosition ? position[0] : this.highestPosition;
+      this.lowestPosition = position[0] > this.lowestPosition ? position[0] : this.lowestPosition;
   }
 
 
