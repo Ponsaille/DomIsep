@@ -1,5 +1,4 @@
 
-import java.awt.Color;
 import java.util.*;
 
 
@@ -14,10 +13,10 @@ public class Player {
 
   private Side[][] kingdom;
   private boolean canPlay;
-  private int mostLeftPosition = 5;
-  private int mostRightPosition = 5;
-  private int highestPosition = 5;
-  private int lowestPosition = 5;
+  private int mostLeftPosition = 4;
+  private int mostRightPosition = 4;
+  private int highestPosition = 4;
+  private int lowestPosition = 4;
    
   //
   // Constructors
@@ -27,8 +26,8 @@ public class Player {
     for(int i = 0; i<9; i++) {
       Arrays.fill(this.kingdom[i], new Side("Vide", 0));
     }
-    this.kingdom[5][5] = new Side("Chateau", 0);
-  };
+    this.kingdom[4][4] = new Side("Chateau", 0);
+  }
   
   //
   // Methods
@@ -43,7 +42,7 @@ public class Player {
    * Get the value of kingdom
    * @return the value of kingdom
    */
-  private Side[][] getKingdom () {
+  public Side[][] getKingdom () {
     return kingdom;
   }
 
@@ -59,7 +58,7 @@ public class Player {
    * Get the value of canPlay
    * @return the value of canPlay
    */
-  private boolean getCanPlay () {
+  public boolean getCanPlay () {
     return canPlay;
   }
 
@@ -70,7 +69,7 @@ public class Player {
   /**
    * @return       int
    */
-  private int getPoints()
+  public int getPoints()
   {
     return 0;
   }
@@ -79,10 +78,13 @@ public class Player {
   /**
    * @return       Side[9][9]
    */
-  private Side[][] getBoard()
+  public Side[][] getBoard()
   {
-    // A modifier
-    return this.kingdom;
+    Side[][] board = new Side[5][5];
+    for(int i = 0; i<5; i++) {
+        board[i] = Arrays.copyOfRange(this.kingdom[this.highestPosition + i], this.mostLeftPosition, this.mostLeftPosition + 6);
+    }
+    return board;
   }
 
   
@@ -142,11 +144,7 @@ public class Player {
   }
 
   private boolean isEmptyCell(int[] position) {
-    if(this.kingdom[position[0]][position[1]].getType().equals("Vide")) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.kingdom[position[0]][position[1]].getType().equals("Vide");
   }
 
   private boolean isGoodPosition(Domino domino, int[] leftPosition, int[] rightPosition, King king)
@@ -170,11 +168,7 @@ public class Player {
     int width = mostRightPositon - mostLeftPosition;
     int heigh = lowestPosition - highestPosition;
 
-    if(width > 5 || heigh > 5) {
-      return false;
-    }
-
-    return true;
+    return (width < 5 && heigh < 5);
   }
 
   private void updateExtremums(int[] position) {
@@ -185,12 +179,8 @@ public class Player {
   }
 
   private boolean isValidDominoTypes(Domino domino, int[] leftPosition, int[] rightPosition) {
-    if(this.isValidSideType(domino.getLeftSide(), leftPosition)
-            || this.isValidSideType(domino.getRightSide(), rightPosition)) {
-      return true;
-    } else {
-      return false;
-    }
+    return (this.isValidSideType(domino.getLeftSide(), leftPosition)
+            || this.isValidSideType(domino.getRightSide(), rightPosition));
   }
 
   private boolean isValidSideType(Side side, int[] position) {
@@ -200,15 +190,16 @@ public class Player {
             {position[0], position[1]-1},
             {position[0]+1, position[1]}
     };
-    for(int i = 0; i<positionsToCheck.length; i++) {
-      if(isSideInside(positionsToCheck[i])) {
-        String type = this.kingdom[positionsToCheck[i][0]][positionsToCheck[i][1]].getType();
-        if(type.equals(side.getType())
-                || type.equals("Chateau")) {
-          return true;
-        }
+
+      for (int[] actualPosition : positionsToCheck) {
+          if (isSideInside(actualPosition)) {
+              String type = this.kingdom[actualPosition[0]][actualPosition[1]].getType();
+              if (type.equals(side.getType())
+                      || type.equals("Chateau")) {
+                  return true;
+              }
+          }
       }
-    }
     return false;
   }
 
