@@ -222,10 +222,6 @@ public class Player {
   }
 
   public boolean canPlay() {
-    this.mostRightPosition = 4;
-    this.mostLeftPosition = 0;
-    this.highestPosition = 0;
-    this.lowestPosition = 4;
     if(this.mostRightPosition - this.mostLeftPosition < 4 && this.lowestPosition - this.highestPosition < 4) {
       return true;
     } else {
