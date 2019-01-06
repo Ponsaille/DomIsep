@@ -156,16 +156,16 @@ public class Player {
 
   private boolean isSideInside(int[] position) {
     if(position[0] > 8 || position[1] > 8 || position[0] < 0 || position[1] < 0)  {
-      return  false;
+      return false;
     }
 
     //Editer les nouveaux extremums
     int mostLeftPosition = position[1] < this.mostLeftPosition ? position[1] : this.mostLeftPosition;
-    int mostRightPositon = position[1] > this.mostRightPosition ? position[1] : this.mostRightPosition;
+    int mostRightPosition = position[1] > this.mostRightPosition ? position[1] : this.mostRightPosition;
     int highestPosition = position[0] < this.highestPosition ? position[0] : this.highestPosition;
     int lowestPosition = position[0] > this.lowestPosition ? position[0] : this.lowestPosition;
 
-    int width = mostRightPositon - mostLeftPosition;
+    int width = mostRightPosition - mostLeftPosition;
     int heigh = lowestPosition - highestPosition;
 
     return (width < 5 && heigh < 5);
@@ -201,6 +201,46 @@ public class Player {
           }
       }
     return false;
+  }
+
+  private boolean isNearSameType(String type, int[] position) {
+    int[][] positionsToCheck = {
+            {position[0], position[1]+1},
+            {position[0]-1, position[1]},
+            {position[0], position[1]-1},
+            {position[0]+1, position[1]}
+    };
+    for (int[] actualPosition : positionsToCheck) {
+      if (isSideInside(actualPosition)) {
+        String nextType = this.kingdom[actualPosition[0]][actualPosition[1]].getType();
+        if (nextType.equals(type)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  public boolean canPlay() {
+    this.mostRightPosition = 4;
+    this.mostLeftPosition = 0;
+    this.highestPosition = 0;
+    this.lowestPosition = 4;
+    if(this.mostRightPosition - this.mostLeftPosition < 4 && this.lowestPosition - this.highestPosition < 4) {
+      return true;
+    } else {
+      for(int x = this.mostLeftPosition; x < this.mostRightPosition; x++) {
+        for (int y =  this.highestPosition; y < this.lowestPosition; y++) {
+          if(this.kingdom[x][y].getType().equals("Vide")) {
+            int[] position = {x, y};
+            if(this.isNearSameType("Vide", position)) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
+    }
   }
 
 
