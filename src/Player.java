@@ -24,7 +24,10 @@ public class Player {
   //
   public Player (int id) {
     this.kingdom = new Side[9][9];
-    this.kingdom[5][5] = new Side("Château", 0);
+    for(int i = 0; i<9; i++) {
+      Arrays.fill(this.kingdom[i], new Side("Vide", 0));
+    }
+    this.kingdom[5][5] = new Side("Chateau", 0);
   };
   
   //
@@ -124,20 +127,22 @@ public class Player {
     if(isSideInside(leftPosition)
             && isSideInside(rightPosition)
             && isEmptyCell(leftPosition)
-            && isEmptyCell(rightPosition)) {
+            && isEmptyCell(rightPosition)
+            && isValidDominoTypes(domino, leftPosition, rightPosition)
+    ) {
       this.kingdom[leftPosition[0]][leftPosition[1]] = domino.getLeftSide();
       this.kingdom[rightPosition[0]][rightPosition[1]] = domino.getRightSide();
 
       this.updateExtremums(leftPosition);
       this.updateExtremums(rightPosition);
     } else {
-      System.out.println("Postion invalide");
+      System.out.println("Position invalide");
       this.moveDomino(domino);
     }
   }
 
   private boolean isEmptyCell(int[] position) {
-    if(this.kingdom[position[0]][position[1]] == null) {
+    if(this.kingdom[position[0]][position[1]].getType().equals("Vide")) {
       return true;
     } else {
       return false;
@@ -177,6 +182,34 @@ public class Player {
       this.mostRightPosition = position[1] > this.mostRightPosition ? position[1] : this.mostRightPosition;
       this.highestPosition = position[0] < this.highestPosition ? position[0] : this.highestPosition;
       this.lowestPosition = position[0] > this.lowestPosition ? position[0] : this.lowestPosition;
+  }
+
+  private boolean isValidDominoTypes(Domino domino, int[] leftPosition, int[] rightPosition) {
+    if(this.isValidSideType(domino.getLeftSide(), leftPosition)
+            || this.isValidSideType(domino.getRightSide(), rightPosition)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private boolean isValidSideType(Side side, int[] position) {
+    int[][] positionsToCheck = {
+            {position[0], position[1]+1},
+            {position[0]-1, position[1]},
+            {position[0], position[1]-1},
+            {position[0]+1, position[1]}
+    };
+    for(int i = 0; i<positionsToCheck.length; i++) {
+      if(isSideInside(positionsToCheck[i])) {
+        String type = this.kingdom[positionsToCheck[i][0]][positionsToCheck[i][1]].getType();
+        if(type.equals(side.getType())
+                || type.equals("Chateau")) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
 
