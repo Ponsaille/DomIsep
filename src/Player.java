@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -237,6 +238,69 @@ public class Player {
       }
       return false;
     }
+  }
+
+  public int countPoints() {
+      List<List<Side>> goups = new ArrayList<>();
+      Set<List<Integer>> alreadyVisited = new HashSet<>();
+      for(int x = this.mostLeftPosition; x <= this.mostRightPosition; x++) {
+          for (int y =  this.highestPosition; y <= this.lowestPosition; y++) {
+              String type = this.kingdom[x][y].getType();
+              List<Integer> position = new ArrayList<>();
+              position.add(x);
+              position.add(y);
+              if(!type.equals("Vide") && !alreadyVisited.contains(position)) {
+                  List<Integer> firstPosition = new ArrayList<>();
+                  firstPosition.add(x);
+                  firstPosition.add(y);
+                  List<Side> group = new ArrayList<>();
+                  group.add(this.kingdom[x][y]);
+                  Stack<List<Integer>> toVisit = new Stack<>();
+                  getAdjacents(firstPosition, type, toVisit);
+                  alreadyVisited.add(firstPosition);
+                  while (!toVisit.empty()) {
+                      List<Integer> nextPosition = toVisit.pop();
+                      if(!alreadyVisited.contains(nextPosition)) {
+                          alreadyVisited.add(nextPosition);
+                          group.add(this.kingdom[nextPosition.get(0)][nextPosition.get(1)]);
+                          getAdjacents(nextPosition, type, toVisit);
+                      }
+                  }
+                  goups.add(group);
+              }
+          }
+      }
+
+      int total = 0;
+      Iterator<List<Side>> groupsIterator = goups.iterator();
+      while (groupsIterator.hasNext()) {
+          int crowns = 0;
+          List<Side> group = groupsIterator.next();
+          Iterator<Side> groupIterator = group.iterator();
+          while (groupIterator.hasNext()) {
+              crowns += groupIterator.next().getCrowns();
+          }
+          total += crowns*group.size();
+      }
+      return total;
+  }
+
+  private void getAdjacents(List<Integer> position, String type, Stack toVisit) {
+      int[][] positionsToCheck = {
+              {position.get(0), position.get(1)+1},
+              {position.get(0)-1, position.get(1)},
+              {position.get(0), position.get(1)-1},
+              {position.get(0)+1, position.get(1)}
+      };
+
+      for (int[] actualPosition : positionsToCheck) {
+          if (isSideInside(actualPosition)) {
+              Side actualSide = this.kingdom[actualPosition[0]][actualPosition[1]];
+              if (actualSide.getType().equals(type)) {
+                toVisit.push(Arrays.stream(actualPosition).boxed().collect(Collectors.toList()));
+              }
+          }
+      }
   }
 
 
