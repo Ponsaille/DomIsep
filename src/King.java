@@ -1,4 +1,4 @@
-import java.awt.Color;
+import org.newdawn.slick.Color;
 
 /**
  * Class King

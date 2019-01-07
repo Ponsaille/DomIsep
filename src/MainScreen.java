@@ -12,6 +12,7 @@ import java.util.List;
 
 public class MainScreen extends BasicGameState {
     public static final int ID = 1;
+    private GameContainer container;
     private Partie partie;
     private StateBasedGame game;
     private Image background;
@@ -24,6 +25,7 @@ public class MainScreen extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        this.container = container;
         this.game = game;
         this.background = new Image(new File("data/images/home_background.png").getAbsolutePath());
         this.titleFont = new TrueTypeFont(new Font("TimesRoman", Font.PLAIN, 50),false);
@@ -54,9 +56,11 @@ public class MainScreen extends BasicGameState {
 
     public void keyReleased(int key, char c) {
         if (key == 49) {
-            partie.newPlayer();
+            this.partie.newPlayer();
         } else if (key == 28) {
-            System.out.println("Le jeu démarre");
+            List<BasicGameState> screens = ((Game) this.game).getScreens();
+            ((GameScreen) screens.get(1)).upgrade();
+            this.game.enterState(GameScreen.ID);
         }
     }
 

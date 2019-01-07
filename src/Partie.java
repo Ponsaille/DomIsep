@@ -1,5 +1,5 @@
 
-import java.awt.Color;
+import org.newdawn.slick.Color;
 import java.util.*;
 
 
@@ -154,6 +154,40 @@ public class Partie {
     return players.size() > 1;
   }
 
+  public void start() {
+    this.middle = new Middle(players.size());
+    this.middle.pick();
+    this.middle.sort();
+
+    // Setting the number of kings per player
+    int nbKingsPerPlayer;
+    switch(players.size()) {
+      case 2:
+        nbKingsPerPlayer = 2;
+        break;
+      case 3:
+      case 4:
+        nbKingsPerPlayer = 1;
+        break;
+      default:
+        System.err.println("Le nombre de joueur n'est pas standart");
+        return;
+    }
+    // Pour éviter d'avoir 2 fois la même couleur
+    Color[] disponnibleColors = {Color.black,Color.blue,Color.red,Color.green};
+    disponnibleColors = Arrays.copyOfRange(disponnibleColors, 0, this.players.size()*nbKingsPerPlayer);
+
+    // Génération des rois
+    King[] kings = new King[this.players.size()*nbKingsPerPlayer];
+    for(int i = 0; i < kings.length; i++) {
+      kings[i] = new King(disponnibleColors[i], this.players.get(i%this.players.size()));
+    }
+    // Ajoute les rois au milieu
+    this.middle.addKings(kings);
+
+    this.middle.pick();
+  }
+
   public void run() {
     this.middle = new Middle(players.size());
     this.middle.pick();
@@ -174,7 +208,7 @@ public class Partie {
         return;
     }
     // Pour éviter d'avoir 2 fois la même couleur
-    Color[] disponnibleColors = {Color.BLACK,Color.BLUE,Color.RED,Color.GREEN};
+    Color[] disponnibleColors = {Color.black,Color.blue,Color.red,Color.green};
     disponnibleColors = Arrays.copyOfRange(disponnibleColors, 0, this.players.size()*nbKingsPerPlayer);
 
     // Génération des rois
