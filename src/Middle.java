@@ -109,6 +109,7 @@ public class Middle {
   public void pick() {
     // Moving second column to the first one
     firstColumn = new ArrayList<>(secondColumn);
+    secondColumn = new ArrayList<>();
 
     // Moving the kings to the first row
     kingsFirstPositions = kingsSecondPositions.clone();
@@ -117,7 +118,7 @@ public class Middle {
     // Populating the new second column
     for(int i = 0; i<nbDominos; i++) {
       secondColumn.add(pioche.pick());
-    } 
+    }
 
     System.out.println("First column");
 
@@ -206,10 +207,15 @@ public class Middle {
       return null;
     }
     int position = Arrays.asList(this.kingsFirstPositions).indexOf(king);
+    System.out.println(Arrays.toString(kingsFirstPositions));
+    System.out.println(king);
     this.kingsFirstPositions[position] = null;
     this.kingsSecondPositions[nextPosition] = king;
-    System.out.println(this.firstColumn.get(position));
-    return this.firstColumn.get(position);
+    if(this.firstColumn.size() > 0) {
+      return this.firstColumn.get(position);
+    } else {
+      return null;
+    }
   }
 
 

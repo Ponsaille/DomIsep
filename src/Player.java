@@ -13,6 +13,7 @@ public class Player {
   //
 
   private Side[][] kingdom;
+  private int id;
   private boolean canPlay;
   private int mostLeftPosition = 4;
   private int mostRightPosition = 4;
@@ -23,6 +24,7 @@ public class Player {
   // Constructors
   //
   public Player (int id) {
+    this.id = id;
     this.kingdom = new Side[9][9];
     for(int i = 0; i<9; i++) {
       Arrays.fill(this.kingdom[i], new Side("Vide", 0));
@@ -45,6 +47,10 @@ public class Player {
    */
   public Side[][] getKingdom () {
     return kingdom;
+  }
+
+  public int getId() {
+      return this.id;
   }
 
   /**
