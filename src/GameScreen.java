@@ -14,7 +14,6 @@ public class GameScreen extends BasicGameState {
     private StateBasedGame game;
     private List<PlayerRenderer> playerRenderers;
     private MiddleRenderer middleRenderer;
-    private int gameState = 0;
 
 
     public GameScreen(Partie partie) {
@@ -37,7 +36,7 @@ public class GameScreen extends BasicGameState {
         };
         for(int i = 0; i < partie.getPlayers().size(); i++) {
             System.out.println(this.playerRenderers);
-            this.playerRenderers.add(new PlayerRenderer(partie.getPlayers().get(i), positions[i]));
+            this.playerRenderers.add(new PlayerRenderer(partie.getPlayers().get(i), partie, positions[i]));
         }
         this.partie.start();
         this.middleRenderer = new MiddleRenderer(partie.getMiddle(), this.playerRenderers);
@@ -56,14 +55,17 @@ public class GameScreen extends BasicGameState {
         Input input = container.getInput();
         int mouseX = input.getMouseX();
         int mouseY = input.getMouseY();
-        //this.middleRenderer.update(container, game, delta, gameState);
-        if(this.gameState == 0) {
+        //this.middleRenderer.update(container, game, delta);
+        if(this.partie.getGameStage() == 0) {
             if(this.middleRenderer.nullStateEnded()) {
-                this.gameState = 1;
+                this.partie.setGameStage(1);
             }
         }
         for (PlayerRenderer playerRenderer:this.playerRenderers) {
             playerRenderer.update(mouseX, mouseY);
+            if(playerRenderer.hasADominoToPlace()) {
+                this.partie.setGameStage(2);
+            }
         }
     }
 
@@ -75,11 +77,13 @@ public class GameScreen extends BasicGameState {
 
     public void mousePressed(int button, int x, int y) {
         if(button == 0) {
-            if(gameState == 0) {
+            if(this.partie.getGameStage() == 0  || this.partie.getGameStage() == 1) {
                 this.middleRenderer.updateDominos(x, y);
-            } else if(gameState == 1) {
-                this.middleRenderer.updateDominos(x,y);
-                this.gameState = 2;
+            }
+        }
+        if(this.partie.getGameStage() == 2) {
+            for (PlayerRenderer playerRenderer:this.playerRenderers) {
+                playerRenderer.moussePressed(button, x, y);
             }
         }
     }

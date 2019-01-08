@@ -19,13 +19,17 @@ public class Partie {
   private int round;
   private int playing;
   private Middle middle;
-  private int nbCanPlay  = 0;
+  private int nbCanPlay;
   private Scanner scanner = new Scanner(System.in);
+  private int gameStage;
   
   //
   // Constructors
   //
-  public Partie () { };
+  public Partie () {
+    nbCanPlay = 0;
+    gameStage = 0;
+  };
   
   //
   // Methods
@@ -43,6 +47,14 @@ public class Partie {
    */
   public int getNbPlayer () {
     return players.size();
+  }
+
+  public int getGameStage() {
+    return this.gameStage;
+  }
+
+  public void setGameStage(int gameStage) {
+    this.gameStage = gameStage;
   }
 
   /**

@@ -106,26 +106,29 @@ public class Player {
     leftPosition[0] = scanner.nextInt();
     System.out.print("y: ");
     leftPosition[1] = scanner.nextInt();
+    while (!placeDomino(domino, leftPosition, orientation)) {
+        System.out.println();
+    }
     placeDomino(domino, leftPosition, orientation);
   }
 
-  public void placeDomino(Domino domino, int[] leftPosition, int orientation) {
+  public boolean placeDomino(Domino domino, int[] leftPosition, int orientation) {
     int[] rightPosition = new int[2];
     switch (orientation) {
       case 0:
-        rightPosition[1] = leftPosition[1]+1;
-        rightPosition[0] = leftPosition[0];
+        rightPosition[0] = leftPosition[0]+1;
+        rightPosition[1] = leftPosition[1];
         break;
       case 1:
-        rightPosition[1] = leftPosition[1];
-        rightPosition[0] = leftPosition[0]-1;
+        rightPosition[0] = leftPosition[0];
+        rightPosition[1] = leftPosition[1]-1;
         break;
       case 2:
-        rightPosition[1] = leftPosition[1]-1;
-        rightPosition[0] = leftPosition[0];
+        rightPosition[0] = leftPosition[0]-1;
+        rightPosition[1] = leftPosition[1];
         break;
       case 3:
-        rightPosition[1] = leftPosition[1];
+        rightPosition[0] = leftPosition[0];
         rightPosition[1] = leftPosition[1]+1;
         break;
       default:
@@ -133,20 +136,24 @@ public class Player {
         break;
     }
 
+      System.out.println(Arrays.toString(leftPosition));
+      System.out.println(Arrays.toString(rightPosition));
+
     if(isSideInside(leftPosition)
             && isSideInside(rightPosition)
             && isEmptyCell(leftPosition)
             && isEmptyCell(rightPosition)
-            && isValidDominoTypes(domino, leftPosition, rightPosition)
+//            && isValidDominoTypes(domino, leftPosition, rightPosition)
     ) {
       this.kingdom[leftPosition[0]][leftPosition[1]] = domino.getLeftSide();
       this.kingdom[rightPosition[0]][rightPosition[1]] = domino.getRightSide();
 
       this.updateExtremums(leftPosition);
       this.updateExtremums(rightPosition);
+      return true;
     } else {
       System.out.println("Position invalide");
-      this.moveDomino(domino);
+      return false;
     }
   }
 

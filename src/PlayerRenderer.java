@@ -1,8 +1,11 @@
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 
+import java.util.Arrays;
+
 public class PlayerRenderer {
     private Player player;
+    private Partie partie;
     private int x;
     private int y;
     private Domino dominoToPlace;
@@ -10,8 +13,9 @@ public class PlayerRenderer {
     private int mouseX;
     private int mouseY;
 
-    public PlayerRenderer(Player player, int[] position) {
+    public PlayerRenderer(Player player, Partie partie, int[] position) {
         this.player = player;
+        this.partie = partie;
         this.x = position[0];
         this.y = position[1];
         this.dominoToPlace = null;
@@ -117,6 +121,7 @@ public class PlayerRenderer {
     }
 
     public void setDominoToPlace(Domino domino) {
+        System.out.println("Plyer " + player.getId());
         this.dominoToPlace = domino;
         this.orientation = 0;
     }
@@ -131,6 +136,41 @@ public class PlayerRenderer {
             if (key == 19) {
                 this.orientation = (this.orientation+1)%4;
             }
+        }
+    }
+
+    public void moussePressed(int button, int x, int y) {
+        if (dominoToPlace != null) {
+            this.mouseBoardTrack(x, y);
+        }
+    }
+
+    private void mouseBoardTrack(int mouseX, int mouseY) {
+        int width = 150;
+        int height = 150;
+
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                if(mouseX > getRelativeX(x*width/9) && mouseX < getRelativeX((x+1)*width/9) && mouseY > getRelativeY(y*height/9) && mouseY < getRelativeY((y+1)*height/9)) {
+                    this.placeDomino(x, y);
+                }
+            }
+        }
+    }
+
+    public boolean hasADominoToPlace() {
+        return !(dominoToPlace == null);
+    }
+
+    private void placeDomino(int x, int y) {
+        int[] position = {x, y};
+        System.out.println(dominoToPlace);
+        System.out.println(Arrays.toString(position));
+        System.out.println(this.orientation);
+        if(this.player.placeDomino(this.dominoToPlace, position, this.orientation)) {
+            this.dominoToPlace = null;
+            this.orientation = 0;
+            this.partie.setGameStage(1);
         }
     }
 }
