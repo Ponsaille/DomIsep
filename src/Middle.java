@@ -167,7 +167,23 @@ public class Middle {
    */
   public Domino[][] getMiddle()
   {
-    return new Domino[2][4];
+    Domino[][] middle = new Domino[2][nbDominos];
+    for (int i = 0; i<this.firstColumn.size(); i++) {
+      middle[0][i] = this.firstColumn.get(i);
+    }
+    for (int i = 0; i<this.secondColumn.size(); i++) {
+      middle[1][i] = this.secondColumn.get(i);
+    }
+    return middle;
+  }
+
+  public King[][] getKings() {
+    King[][] kings = {
+            kingsFirstPositions,
+            kingsSecondPositions
+    };
+
+    return kings;
   }
 
   public void addKings(King[] kings) {

@@ -98,7 +98,7 @@ public class Partie {
    * Get the value of middle
    * @return the value of middle
    */
-  private Middle getMiddle () {
+  public Middle getMiddle () {
     return middle;
   }
 
@@ -156,8 +156,6 @@ public class Partie {
 
   public void start() {
     this.middle = new Middle(players.size());
-    this.middle.pick();
-    this.middle.sort();
 
     // Setting the number of kings per player
     int nbKingsPerPlayer;
@@ -186,6 +184,7 @@ public class Partie {
     this.middle.addKings(kings);
 
     this.middle.pick();
+    this.middle.sort();
   }
 
   public void run() {

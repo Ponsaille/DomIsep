@@ -121,10 +121,7 @@ private void removeNDominos(int n) {
   /**
    * @return       Domino
    */
-  public Domino pick()
-  {
-    return dominos.pop();
-  }
+  public Domino pick() { return dominos.pop(); }
 
 
 }

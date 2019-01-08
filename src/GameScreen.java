@@ -13,6 +13,7 @@ public class GameScreen extends BasicGameState {
     private Partie partie;
     private StateBasedGame game;
     private List<PlayerRenderer> playerRenderers;
+    private MiddleRenderer middleRenderer;
 
 
     public GameScreen(Partie partie) {
@@ -23,7 +24,6 @@ public class GameScreen extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         List<Player> players = partie.getPlayers();
         this.game = game;
-        this.partie.start();
         this.playerRenderers = new ArrayList<>();
     }
 
@@ -38,6 +38,8 @@ public class GameScreen extends BasicGameState {
             System.out.println(this.playerRenderers);
             this.playerRenderers.add(new PlayerRenderer(partie.getPlayers().get(i), positions[i], i));
         }
+        this.partie.start();
+        this.middleRenderer = new MiddleRenderer(partie.getMiddle());
     }
 
     @Override
@@ -45,6 +47,7 @@ public class GameScreen extends BasicGameState {
         for (PlayerRenderer playerRenderer:this.playerRenderers) {
             playerRenderer.render(g);
         }
+        this.middleRenderer.render(g);
     }
 
     @Override

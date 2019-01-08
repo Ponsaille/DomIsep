@@ -73,13 +73,17 @@ public class PlayerRenderer {
         g.fillRect(x,y,width,heigth);
         g.setColor(Color.white);
         g.drawRect(x,y,width,heigth);
+        g.setColor(Color.black);
+        g.drawString(Integer.toString(side.getCrowns()), x+1, y+1);
     }
 
     private void renderName(Graphics g) {
+        g.setColor(Color.white);
         g.drawString("Player " + this.id, getRelativeX(0), getRelativeY(175));
     }
 
     private void renderPoints(Graphics g) {
+        g.setColor(Color.white);
         g.drawString(Integer.toString(this.player.countPoints()), getRelativeX(175), getRelativeY(0));
     }
 }
