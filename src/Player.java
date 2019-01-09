@@ -143,7 +143,7 @@ public class Player {
             && isSideInside(rightPosition)
             && isEmptyCell(leftPosition)
             && isEmptyCell(rightPosition)
-//            && isValidDominoTypes(domino, leftPosition, rightPosition)
+            && isValidDominoTypes(domino, leftPosition, rightPosition)
     ) {
       this.kingdom[leftPosition[0]][leftPosition[1]] = domino.getLeftSide();
       this.kingdom[rightPosition[0]][rightPosition[1]] = domino.getRightSide();
@@ -256,8 +256,12 @@ public class Player {
   public int countPoints() {
       List<List<Side>> goups = new ArrayList<>();
       Set<List<Integer>> alreadyVisited = new HashSet<>();
-      for(int x = this.mostLeftPosition; x <= this.mostRightPosition; x++) {
-          for (int y =  this.highestPosition; y <= this.lowestPosition; y++) {
+      /*System.out.println(this.mostLeftPosition);
+      System.out.println(this.mostRightPosition);
+      System.out.println(this.highestPosition);
+      System.out.println(this.lowestPosition);*/
+      for(int x = this.highestPosition; x <= this.lowestPosition; x++) {
+          for (int y = this.mostLeftPosition; y <= this.mostRightPosition; y++) {
               String type = this.kingdom[x][y].getType();
               List<Integer> position = new ArrayList<>();
               position.add(x);

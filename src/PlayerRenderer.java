@@ -121,7 +121,7 @@ public class PlayerRenderer {
     }
 
     public void setDominoToPlace(Domino domino) {
-        System.out.println("Plyer " + player.getId());
+        System.out.println("Player " + player.getId());
         this.dominoToPlace = domino;
         this.orientation = 0;
     }
@@ -142,6 +142,8 @@ public class PlayerRenderer {
     public void moussePressed(int button, int x, int y) {
         if (dominoToPlace != null) {
             this.mouseBoardTrack(x, y);
+            //this.player.countPoints();
+            //System.out.println("End points");
         }
     }
 

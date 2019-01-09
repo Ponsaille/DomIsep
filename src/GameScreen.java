@@ -56,7 +56,7 @@ public class GameScreen extends BasicGameState {
         int mouseX = input.getMouseX();
         int mouseY = input.getMouseY();
         //this.middleRenderer.update(container, game, delta);
-        if(this.partie.getGameStage() == 0) {
+        if(this.partie.getGameStage() == 0 || this.partie.getGameStage() == 2) {
             if(this.middleRenderer.nullStateEnded()) {
                 this.partie.setGameStage(1);
             }
