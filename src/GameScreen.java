@@ -39,7 +39,7 @@ public class GameScreen extends BasicGameState {
             this.playerRenderers.add(new PlayerRenderer(partie.getPlayers().get(i), partie, positions[i]));
         }
         this.partie.start();
-        this.middleRenderer = new MiddleRenderer(partie.getMiddle(), this.playerRenderers);
+        this.middleRenderer = new MiddleRenderer(partie.getMiddle(), this.playerRenderers, this.partie);
     }
 
     @Override

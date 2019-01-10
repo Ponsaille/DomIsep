@@ -239,8 +239,8 @@ public class Player {
     if(this.mostRightPosition - this.mostLeftPosition < 4 && this.lowestPosition - this.highestPosition < 4) {
       return true;
     } else {
-      for(int x = this.mostLeftPosition; x < this.mostRightPosition; x++) {
-        for (int y =  this.highestPosition; y < this.lowestPosition; y++) {
+      for(int x = this.highestPosition; x <  this.lowestPosition; x++) {
+        for (int y = this.mostLeftPosition; y < this.mostRightPosition; y++) {
           if(this.kingdom[x][y].getType().equals("Vide")) {
             int[] position = {x, y};
             if(this.isNearSameType("Vide", position)) {

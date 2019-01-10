@@ -122,8 +122,12 @@ public class PlayerRenderer {
 
     public void setDominoToPlace(Domino domino) {
         System.out.println("Player " + player.getId());
-        this.dominoToPlace = domino;
-        this.orientation = 0;
+        if(this.player.canPlay()) {
+            this.dominoToPlace = domino;
+            this.orientation = 0;
+        } else {
+            System.out.println("Vous ne pouvez plus jouer");
+        }
     }
 
     public void update(int x, int y) {
@@ -171,7 +175,6 @@ public class PlayerRenderer {
         System.out.println(this.orientation);
         if(this.player.placeDomino(this.dominoToPlace, position, this.orientation)) {
             this.dominoToPlace = null;
-            this.orientation = 0;
             this.partie.setGameStage(1);
         }
     }

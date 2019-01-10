@@ -123,5 +123,9 @@ private void removeNDominos(int n) {
    */
   public Domino pick() { return dominos.pop(); }
 
+  public boolean isEmpty() {
+    return  dominos.isEmpty();
+  }
+
 
 }

@@ -249,4 +249,15 @@ public class Partie {
       playerId++;
     }*/
   }
+
+
+
+  public boolean isDone() {
+    for (Player player : players) {
+      if(player.canPlay()) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

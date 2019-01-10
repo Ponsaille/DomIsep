@@ -135,6 +135,10 @@ public class Middle {
     }
   }
 
+  public boolean isEmpty() {
+    return this.pioche.isEmpty();
+  }
+
 
   /**
    */
@@ -236,6 +240,15 @@ public class Middle {
       } while(domino == null);
       actualKing.getPlayer().moveDomino(domino);
       System.out.println();
+    }
+  }
+
+  public void removeFirstKing() {
+    for(int i = 0; i<this.kingsSecondPositions.length; i++) {
+      King king = this.kingsSecondPositions[i];
+      if(king != null) {
+        this.kingsSecondPositions[i] = null;
+      }
     }
   }
 
