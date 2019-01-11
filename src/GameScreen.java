@@ -35,7 +35,6 @@ public class GameScreen extends BasicGameState {
                 {550, 350}
         };
         for(int i = 0; i < partie.getPlayers().size(); i++) {
-            System.out.println(this.playerRenderers);
             this.playerRenderers.add(new PlayerRenderer(partie.getPlayers().get(i), partie, positions[i]));
         }
         this.partie.start();
@@ -57,7 +56,6 @@ public class GameScreen extends BasicGameState {
         int mouseY = input.getMouseY();
         //this.middleRenderer.update(container, game, delta);
         if(this.partie.getGameStage() == 0 || this.partie.getGameStage() == 2) {
-            System.out.println(this.partie.getGameStage());
             if(this.middleRenderer.nullStateEnded()) {
                 this.partie.setGameStage(1);
             }

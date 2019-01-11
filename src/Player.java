@@ -24,7 +24,6 @@ public class Player {
   // Constructors
   //
   public Player (int id) {
-    this.id = id;
     this.kingdom = new Side[9][9];
     for(int i = 0; i<9; i++) {
       Arrays.fill(this.kingdom[i], new Side("Vide", 0));
@@ -236,13 +235,13 @@ public class Player {
   }
 
   public boolean canPlay() {
-    /*if(this.mostRightPosition - this.mostLeftPosition < 4 && this.lowestPosition - this.highestPosition < 4) {
+    if(this.mostRightPosition - this.mostLeftPosition < 4 && this.lowestPosition - this.highestPosition < 4) {
       return true;
     } else {
-      for(int x = this.highestPosition; x <  this.lowestPosition; x++) {
-        for (int y = this.mostLeftPosition; y < this.mostRightPosition; y++) {*/
-      for(int x = 0; x <  9; x++) {
-        for (int y = 0; y < 9; y++) {
+      for(int x = this.highestPosition; x <=  this.lowestPosition; x++) {
+        for (int y = this.mostLeftPosition; y <= this.mostRightPosition; y++) {
+      /*for(int x = 0; x <  9; x++) {
+        for (int y = 0; y < 9; y++) {*/
           if(this.kingdom[x][y].getType().equals("Vide")) {
             int[] position = {x, y};
             if(this.isNearSameType("Vide", position)) {
@@ -252,19 +251,20 @@ public class Player {
         }
       }
       return false;
-    /*}*/
+    }
   }
 
   public boolean canPlace(Domino domino) {
       for(int x = 0; x <  9; x++) {
           for (int y = 0; y < 9; y++) {
               int[] position = {x, y};
-              if(this.isNearSameType("Vide", position) &&
-                      (this.isNearSameType(domino.getLeftSide().getType(), position)
-                              || this.isNearSameType("Chateau", position)
-                              || this.isNearSameType(domino.getRightSide().getType(), position)
-                              || this.isNearSameType("Chateau", position))) {
-                  return true;
+              if(this.getKingdom()[x][y].getType() == "Vide" && isSideInside(position)) {
+                  if(this.isNearSameType("Vide", position) &&
+                          (this.isNearSameType(domino.getLeftSide().getType(), position)
+                                  || this.isNearSameType(domino.getRightSide().getType(), position)
+                                  || this.isNearSameType("Chateau", position))) {
+                      return true;
+                  }
               }
           }
       }

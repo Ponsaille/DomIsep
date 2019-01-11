@@ -92,6 +92,9 @@ public class PlayerRenderer {
             case "Chateau":
                 color = Color.white;
                 break;
+            case "bla":
+                color = Color.magenta;
+                break;
             default:
                 color = Color.black;
                 break;
