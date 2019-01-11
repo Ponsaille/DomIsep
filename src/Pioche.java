@@ -37,7 +37,8 @@ public class Pioche {
     // Supprimer ceux qui sont en trop en fonction du nombre de joueur
     switch (nbPlayer) {
       case 2:
-        this.removeNDominos(24);
+        //this.removeNDominos(24);
+        this.removeNDominos(44);
         break;
       case 3:
         this.removeNDominos(12);

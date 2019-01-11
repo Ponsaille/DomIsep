@@ -248,9 +248,19 @@ public class Middle {
       King king = this.kingsSecondPositions[i];
       if(king != null) {
         this.kingsSecondPositions[i] = null;
+        break;
       }
     }
   }
 
+  public boolean isNoKing() {
+      for(int i = 0; i<this.kingsSecondPositions.length; i++) {
+          King king = this.kingsSecondPositions[i];
+          if(king != null) {
+              return false;
+          }
+      }
+      return true;
+  }
 
 }

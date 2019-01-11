@@ -175,7 +175,12 @@ public class PlayerRenderer {
         System.out.println(this.orientation);
         if(this.player.placeDomino(this.dominoToPlace, position, this.orientation)) {
             this.dominoToPlace = null;
-            this.partie.setGameStage(1);
+            if(this.partie.getGameStage() == 3) {
+                this.partie.setGameStage(4);
+                this.partie.getMiddle().removeFirstKing();
+            } else {
+                this.partie.setGameStage(1);
+            }
         }
     }
 }

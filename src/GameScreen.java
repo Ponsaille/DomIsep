@@ -57,15 +57,24 @@ public class GameScreen extends BasicGameState {
         int mouseY = input.getMouseY();
         //this.middleRenderer.update(container, game, delta);
         if(this.partie.getGameStage() == 0 || this.partie.getGameStage() == 2) {
+            System.out.println(this.partie.getGameStage());
             if(this.middleRenderer.nullStateEnded()) {
                 this.partie.setGameStage(1);
             }
         }
         for (PlayerRenderer playerRenderer:this.playerRenderers) {
             playerRenderer.update(mouseX, mouseY);
-            if(playerRenderer.hasADominoToPlace()) {
+            if(playerRenderer.hasADominoToPlace() && this.partie.getGameStage() != 3 && this.partie.getGameStage() != 4) {
                 this.partie.setGameStage(2);
             }
+        }
+
+        if(this.partie.getGameStage() == 4) {
+            this.middleRenderer.nextPlayer();
+        }
+
+        if(this.partie.getGameStage() == 3 && this.partie.getMiddle().isNoKing()) {
+            this.game.enterState(MainScreen.ID);
         }
     }
 
@@ -81,7 +90,7 @@ public class GameScreen extends BasicGameState {
                 this.middleRenderer.updateDominos(x, y);
             }
         }
-        if(this.partie.getGameStage() == 2) {
+        if(this.partie.getGameStage() == 2 || this.partie.getGameStage() == 3) {
             for (PlayerRenderer playerRenderer:this.playerRenderers) {
                 playerRenderer.moussePressed(button, x, y);
             }
