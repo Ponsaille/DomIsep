@@ -74,7 +74,7 @@ public class GameScreen extends BasicGameState {
         }
 
         if(this.partie.getGameStage() == 3 && this.partie.getMiddle().isNoKing()) {
-            this.game.enterState(MainScreen.ID);
+            this.game.enterState(EndScreen.ID);
         }
     }
 

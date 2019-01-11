@@ -23,6 +23,7 @@ public class Game extends StateBasedGame {
         screens = new ArrayList<>();
         screens.add(new MainScreen(partie));
         screens.add(new GameScreen(partie));
+        screens.add(new EndScreen(partie));
     }
 
     @Override
