@@ -122,7 +122,7 @@ public class PlayerRenderer {
 
     public void setDominoToPlace(Domino domino) {
         System.out.println("Player " + player.getId());
-        if(this.player.canPlay()) {
+        if(domino != null && this.player.canPlay() && this.player.canPlace(domino)) {
             this.dominoToPlace = domino;
             this.orientation = 0;
         } else {
