@@ -14,6 +14,7 @@ public class GameScreen extends BasicGameState {
     private StateBasedGame game;
     private List<PlayerRenderer> playerRenderers;
     private MiddleRenderer middleRenderer;
+    private Image background;
 
 
     public GameScreen(Partie partie) {
@@ -22,6 +23,7 @@ public class GameScreen extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        background = new Image(new File("data/images/board.jpg").getAbsolutePath());
         List<Player> players = partie.getPlayers();
         this.game = game;
         this.playerRenderers = new ArrayList<>();
@@ -43,6 +45,7 @@ public class GameScreen extends BasicGameState {
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+        background.draw(0,0);
         for (PlayerRenderer playerRenderer:this.playerRenderers) {
             playerRenderer.render(g);
         }
