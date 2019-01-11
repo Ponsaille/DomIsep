@@ -30,9 +30,9 @@ public class GameScreen extends BasicGameState {
     public void upgrade() {
         int[][] positions = {
                 {0,0},
-                {600, 0},
-                {0, 400},
-                {600, 400}
+                {550, 0},
+                {0, 350},
+                {550, 350}
         };
         for(int i = 0; i < partie.getPlayers().size(); i++) {
             System.out.println(this.playerRenderers);

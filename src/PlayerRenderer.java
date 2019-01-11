@@ -38,8 +38,8 @@ public class PlayerRenderer {
     }
 
     public void renderBoard(Graphics g) {
-        int width = 150;
-        int height = 150;
+        int width = 200;
+        int height = 200;
 
         Side[][] kingdom = player.getKingdom();
 
@@ -106,12 +106,12 @@ public class PlayerRenderer {
 
     private void renderName(Graphics g) {
         g.setColor(Color.white);
-        g.drawString("Player " + this.player.getId(), getRelativeX(0), getRelativeY(175));
+        g.drawString("Player " + this.player.getId(), getRelativeX(0), getRelativeY(225));
     }
 
     private void renderPoints(Graphics g) {
         g.setColor(Color.white);
-        g.drawString(Integer.toString(this.player.countPoints()), getRelativeX(175), getRelativeY(0));
+        g.drawString(Integer.toString(this.player.countPoints()), getRelativeX(225), getRelativeY(0));
     }
 
     private void renderDominoToPlace(Graphics g) {
@@ -152,8 +152,8 @@ public class PlayerRenderer {
     }
 
     private void mouseBoardTrack(int mouseX, int mouseY) {
-        int width = 150;
-        int height = 150;
+        int width = 200;
+        int height = 200;
 
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
