@@ -149,23 +149,7 @@ public class Player {
   }
 
   private boolean isValidSideType(Side side, int[] position) {
-    int[][] positionsToCheck = {
-            {position[0], position[1]+1},
-            {position[0]-1, position[1]},
-            {position[0], position[1]-1},
-            {position[0]+1, position[1]}
-    };
-
-      for (int[] actualPosition : positionsToCheck) {
-          if (isSideInside(actualPosition)) {
-              String type = this.kingdom[actualPosition[0]][actualPosition[1]].getType();
-              if (type.equals(side.getType())
-                      || type.equals("Chateau")) {
-                  return true;
-              }
-          }
-      }
-    return false;
+    return (isNearSameType(side.getType(), position) || isNearSameType("Chateau", position));
   }
 
   protected boolean isNearSameType(String type, int[] position) {
@@ -192,8 +176,6 @@ public class Player {
     } else {
       for(int x = this.highestPosition; x <=  this.lowestPosition; x++) {
         for (int y = this.mostLeftPosition; y <= this.mostRightPosition; y++) {
-      /*for(int x = 0; x <  9; x++) {
-        for (int y = 0; y < 9; y++) {*/
           if(this.kingdom[x][y].getType().equals("Vide")) {
             int[] position = {x, y};
             if(this.isNearSameType("Vide", position)) {
