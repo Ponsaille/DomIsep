@@ -55,18 +55,23 @@ public class MainScreen extends BasicGameState {
     }
 
     public void keyReleased(int key, char c) {
-        if (key == 49) {
-            this.partie.newPlayer();
-        } else if (key == 28) {
-            if(this.partie.getPlayers().size() > 1) {
-                List<BasicGameState> screens = ((Game) this.game).getScreens();
-                ((GameScreen) screens.get(1)).upgrade();
-                this.game.enterState(GameScreen.ID);
-            }
-        } else if (key == 30) {
-            this.partie.newAI();
+        switch (key) {
+            case 49:
+                this.partie.newPlayer();
+                break;
+            case 30:
+                this.partie.newAI();
+                break;
+            case 28:
+                if(this.partie.getPlayers().size() > 1) {
+                    List<BasicGameState> screens = ((Game) this.game).getScreens();
+                    ((GameScreen) screens.get(1)).upgrade();
+                    this.game.enterState(GameScreen.ID);
+                }
+                break;
+            default:
+                break;
         }
-        System.out.println(key);
     }
 
     @Override

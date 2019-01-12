@@ -126,9 +126,6 @@ public class MiddleRenderer extends Renderer {
             King king = this.middle.getKings()[1][i];
             if(king != null) {
                 Domino dominoToPlace = this.middle.getMiddle()[1][i];
-                System.out.println(dominoToPlace);
-                //this.playerRenderers.get(king.getPlayer().getId()).setDominoToPlace(dominoToPlace);
-
                 if(king.getPlayer().getIsAI()) {
                     int[] data = ((AI) king.getPlayer()).getBestPosition(dominoToPlace);
                     int[] position = {data[0], data[1]};
@@ -150,7 +147,6 @@ public class MiddleRenderer extends Renderer {
             }
         }
         if (this.middle.isEmpty()) {
-            System.out.println("Deck fini");
             nextPlayer();
             return false;
         } else {

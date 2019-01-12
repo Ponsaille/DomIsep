@@ -57,7 +57,6 @@ public class Pioche {
   private void populate() {
     String csvFile = "data/dominos.csv";
     String filePath = new File(csvFile).getAbsolutePath();
-    System.out.println(filePath);
     BufferedReader br = null;
     String line = "";
     Side leftSide, rightSide;

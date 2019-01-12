@@ -119,20 +119,6 @@ public class Middle {
     for(int i = 0; i<nbDominos; i++) {
       secondColumn.add(pioche.pick());
     }
-
-    System.out.println("First column");
-
-    Iterator<Domino> iterator1 = firstColumn.iterator();
-    while (iterator1.hasNext()) {
-      System.out.println(iterator1.next().getPower());
-    }
-
-    System.out.println("Second colomun");
-
-    Iterator<Domino> iterator = secondColumn.iterator();
-    while (iterator.hasNext()) {
-      System.out.println(iterator.next().getPower());
-    }
   }
 
   public boolean isEmpty() {
@@ -157,13 +143,6 @@ public class Middle {
     }
 
     secondColumn = temp;
-
-    System.out.println("Sorted :");
-
-    Iterator<Domino> iterator = secondColumn.iterator();
-    while (iterator.hasNext()) {
-      System.out.println(iterator.next().getPower());
-    }
   }
 
 
@@ -211,8 +190,6 @@ public class Middle {
       return null;
     }
     int position = Arrays.asList(this.kingsFirstPositions).indexOf(king);
-    System.out.println(Arrays.toString(kingsFirstPositions));
-    System.out.println(king);
     this.kingsFirstPositions[position] = null;
     this.kingsSecondPositions[nextPosition] = king;
     if(this.firstColumn.size() > 0) {

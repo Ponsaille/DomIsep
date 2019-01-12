@@ -82,7 +82,7 @@ public class Player {
               rightPosition[1] = leftPosition[1]+1;
               break;
           default:
-              System.out.println("L'orientation n'est pas correcte");
+              System.err.println("L'orientation n'est pas correcte");
               break;
       }
 
@@ -110,7 +110,7 @@ public class Player {
       this.updateExtremums(rightPosition);
       return true;
     } else {
-      System.out.println("Position invalide");
+      System.err.println("Position invalide");
       return false;
     }
   }

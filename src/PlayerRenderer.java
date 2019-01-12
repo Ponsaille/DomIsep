@@ -89,7 +89,6 @@ public class PlayerRenderer extends Renderer {
     }
 
     public void setDominoToPlace(Domino domino) {
-        System.out.println("Player " + player.getId());
         if(domino != null && this.player.canPlay() && this.player.canPlace(domino)) {
             this.dominoToPlace = domino;
             this.orientation = 0;
@@ -114,8 +113,6 @@ public class PlayerRenderer extends Renderer {
     public void moussePressed(int button, int x, int y) {
         if (dominoToPlace != null) {
             this.mouseBoardTrack(x, y);
-            //this.player.countPoints();
-            //System.out.println("End points");
         }
     }
 
@@ -138,9 +135,6 @@ public class PlayerRenderer extends Renderer {
 
     private void placeDomino(int x, int y) {
         int[] position = {x, y};
-        System.out.println(dominoToPlace);
-        System.out.println(Arrays.toString(position));
-        System.out.println(this.orientation);
         if(this.player.placeDomino(this.dominoToPlace, position, this.orientation)) {
             this.dominoToPlace = null;
             if(this.partie.getGameStage() == 3) {
