@@ -1,10 +1,11 @@
+package model;
 
 import org.newdawn.slick.Color;
 import java.util.*;
 
 
 /**
- * Class Partie
+ * Class model.Partie
  */
 public class Partie {
 
@@ -13,7 +14,7 @@ public class Partie {
   //
 
   /**
-   * List<Player>
+   * List<model.Player>
    */
   private List<Player> players = new ArrayList();
   private Middle middle;
@@ -54,7 +55,7 @@ public class Partie {
 
   /**
    * Get the value of players
-   * List<Player>
+   * List<model.Player>
    * @return the value of players
    */
   public List<Player> getPlayers () {

@@ -1,3 +1,5 @@
+import model.Partie;
+import model.Player;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.state.BasicGameState;
@@ -7,7 +9,6 @@ import org.newdawn.slick.TrueTypeFont;
 import java.awt.Font;
 
 import java.io.File;
-import java.util.Iterator;
 import java.util.List;
 
 public class MainScreen extends BasicGameState {
@@ -41,7 +42,7 @@ public class MainScreen extends BasicGameState {
 
         List<Player> players = partie.getPlayers();
         for (int i = 0; i<players.size(); i++) {
-            font.drawString(250, 300 + i*35, "Player " + (i+1), Color.black);
+            font.drawString(250, 300 + i*35, (players.get(i).getIsAI() ? "AI " : "Player ") + (i), Color.black);
             font.drawString(450, 300 + i*35, "P", Color.black);
             font.drawString(550, 300 + i*35, "X", Color.red);
         }

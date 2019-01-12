@@ -1,9 +1,8 @@
-
-import java.util.*;
+package model;
 
 
 /**
- * Class Domino
+ * Class model.Domino
  */
 public class Domino {
 

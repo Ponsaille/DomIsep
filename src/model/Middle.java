@@ -1,10 +1,10 @@
+package model;
 
-import java.awt.Color;
 import java.util.*;
 
 
 /**
- * Class Middle
+ * Class model.Middle
  */
 public class Middle {
 
@@ -147,7 +147,7 @@ public class Middle {
 
 
   /**
-   * @return       Domino[2][]
+   * @return       model.Domino[2][]
    */
   public Domino[][] getMiddle()
   {
@@ -183,7 +183,7 @@ public class Middle {
 
 
   /**
-   * @return Domino
+   * @return model.Domino
    */
   public Domino moveKing(King king, int nextPosition) {
     if(nextPosition >= this.kingsFirstPositions.length || this.kingsSecondPositions[nextPosition] != null) {

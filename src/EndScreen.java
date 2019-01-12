@@ -1,3 +1,5 @@
+import model.Partie;
+import model.Player;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.state.BasicGameState;
@@ -40,7 +42,7 @@ public class EndScreen extends BasicGameState {
 
         List<Player> players = partie.getPlayers();
         for (int i = 0; i<players.size(); i++) {
-            font.drawString(250, 300 + i*35, "Player " + (i+1), Color.black);
+            font.drawString(250, 300 + i*35, (players.get(i).getIsAI() ? "AI " : "Player "), Color.black);
             font.drawString(550, 300 + i*35, Integer.toString(this.partie.getPlayers().get(i).countPoints()), Color.black);
         }
     }

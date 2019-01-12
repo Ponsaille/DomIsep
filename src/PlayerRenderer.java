@@ -1,8 +1,9 @@
+import model.Domino;
+import model.Partie;
+import model.Player;
+import model.Side;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
-
-import java.io.File;
-import java.util.Arrays;
 
 public class PlayerRenderer extends Renderer {
     private Player player;
@@ -74,7 +75,7 @@ public class PlayerRenderer extends Renderer {
 
     private void renderName(Graphics g) {
         g.setColor(Color.white);
-        g.drawString("Player " + this.player.getId(), getRelativeX(0), getRelativeY(225));
+        g.drawString("model.Player " + this.player.getId(), getRelativeX(0), getRelativeY(225));
     }
 
     private void renderPoints(Graphics g) {

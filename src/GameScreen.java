@@ -1,10 +1,9 @@
+import model.Partie;
+import model.Player;
 import org.newdawn.slick.*;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.TrueTypeFont;
 
-import java.awt.Font;
 import java.io.File;
 import java.util.*;
 

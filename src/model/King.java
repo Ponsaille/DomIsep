@@ -1,7 +1,9 @@
+package model;
+
 import org.newdawn.slick.Color;
 
 /**
- * Class King
+ * Class model.King
  */
 public class King {
 

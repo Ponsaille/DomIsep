@@ -1,6 +1,8 @@
+import model.Player;
+
 public class Main {
     public static void main(String[] args) {
-        /*Partie partie = new Partie();
+        /*model.Partie partie = new model.Partie();
         partie.newPlayer();
         partie.newPlayer();
         System.out.println(partie.getPlayers());

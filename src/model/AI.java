@@ -1,9 +1,10 @@
+package model;
 
 import java.util.*;
 
 
 /**
- * Class AI
+ * Class model.AI
  */
 public class AI extends Player {
 

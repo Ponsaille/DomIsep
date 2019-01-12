@@ -1,8 +1,8 @@
+import model.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.state.StateBasedGame;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 

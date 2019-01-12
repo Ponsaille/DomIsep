@@ -1,10 +1,11 @@
+package model;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 /**
- * Class Player
+ * Class model.Player
  */
 public class Player {
 

@@ -1,7 +1,7 @@
-
+package model;
 
 /**
- * Class Side
+ * Class model.Side
  */
 public class Side {
 

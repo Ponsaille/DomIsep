@@ -1,3 +1,4 @@
+package model;
 
 import java.util.*;
 import java.io.BufferedReader;
@@ -8,7 +9,7 @@ import java.io.File;
 
 
 /**
- * Class Pioche
+ * Class model.Pioche
  */
 public class Pioche {
 
@@ -17,7 +18,7 @@ public class Pioche {
   //
 
   /**
-   * List<Domino>
+   * List<model.Domino>
    */
   private Stack<Domino> dominos;
   
@@ -97,7 +98,7 @@ private void removeNDominos(int n) {
 
   /**
    * Set the value of dominos
-   * List<Domino>
+   * List<model.Domino>
    * @param newVar the new value of dominos
    */
   private void setDominos (Stack<Domino> newVar) {
@@ -106,7 +107,7 @@ private void removeNDominos(int n) {
 
   /**
    * Get the value of dominos
-   * List<Domino>
+   * List<model.Domino>
    * @return the value of dominos
    */
   private Stack<Domino> getDominos () {
@@ -119,7 +120,7 @@ private void removeNDominos(int n) {
 
 
   /**
-   * @return       Domino
+   * @return       model.Domino
    */
   public Domino pick() { return dominos.pop(); }
 
