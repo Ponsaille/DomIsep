@@ -59,48 +59,7 @@ public class AI extends Player {
     kingdom[leftPosition[0]][leftPosition[1]] = domino.getLeftSide();
     kingdom[rightPosition[0]][rightPosition[1]] = domino.getRightSide();
 
-    List<List<Side>> groups = new ArrayList<>();
-    Set<List<Integer>> alreadyVisited = new HashSet<>();
-    for(int x = this.highestPosition; x <= this.lowestPosition; x++) {
-      for (int y = this.mostLeftPosition; y <= this.mostRightPosition; y++) {
-        String type = kingdom[x][y].getType();
-        List<Integer> position = new ArrayList<>();
-        position.add(x);
-        position.add(y);
-        if(!type.equals("Vide") && !alreadyVisited.contains(position)) {
-          List<Integer> firstPosition = new ArrayList<>();
-          firstPosition.add(x);
-          firstPosition.add(y);
-          List<Side> group = new ArrayList<>();
-          group.add(kingdom[x][y]);
-          Stack<List<Integer>> toVisit = new Stack<>();
-          getAdjacents(firstPosition, type, toVisit);
-          alreadyVisited.add(firstPosition);
-          while (!toVisit.empty()) {
-            List<Integer> nextPosition = toVisit.pop();
-            if(!alreadyVisited.contains(nextPosition)) {
-              alreadyVisited.add(nextPosition);
-              group.add(kingdom[nextPosition.get(0)][nextPosition.get(1)]);
-              getAdjacents(nextPosition, type, toVisit);
-            }
-          }
-          groups.add(group);
-        }
-      }
-    }
-
-    int total = 0;
-    Iterator<List<Side>> groupsIterator = groups.iterator();
-    while (groupsIterator.hasNext()) {
-      int crowns = 0;
-      List<Side> group = groupsIterator.next();
-      Iterator<Side> groupIterator = group.iterator();
-      while (groupIterator.hasNext()) {
-        crowns += groupIterator.next().getCrowns();
-      }
-      total += crowns*group.size();
-    }
-    return total;
+    return countPoints(kingdom);
   }
 
   private List<int[]> addOrientation(List<int[]> positions, Domino domino) {
