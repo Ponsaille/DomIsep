@@ -14,7 +14,6 @@ public class Player {
 
   protected Side[][] kingdom;
   private int id;
-  private boolean canPlay;
   protected int mostLeftPosition = 4;
   protected int mostRightPosition = 4;
   protected int highestPosition = 4;
@@ -25,7 +24,7 @@ public class Player {
   // Constructors
   //
   public Player (int id) {
-      this.id = id;
+    this.id = id;
     this.kingdom = new Side[9][9];
     for(int i = 0; i<9; i++) {
       Arrays.fill(this.kingdom[i], new Side("Vide", 0));
@@ -59,64 +58,9 @@ public class Player {
       return this.id;
   }
 
-  /**
-   * Set the value of canPlay
-   * @param newVar the new value of canPlay
-   */
-  private void setCanPlay (boolean newVar) {
-    canPlay = newVar;
-  }
-
-  /**
-   * Get the value of canPlay
-   * @return the value of canPlay
-   */
-  public boolean getCanPlay () {
-    return canPlay;
-  }
-
   //
   // Other methods
   //
-
-  /**
-   * @return       int
-   */
-  public int getPoints()
-  {
-    return 0;
-  }
-
-
-  /**
-   * @return       Side[9][9]
-   */
-  public Side[][] getBoard()
-  {
-    Side[][] board = new Side[5][5];
-    for(int i = 0; i<5; i++) {
-        board[i] = Arrays.copyOfRange(this.kingdom[this.highestPosition + i], this.mostLeftPosition, this.mostLeftPosition + 6);
-    }
-    return board;
-  }
-
-  
-  // For testings purpose while wainting for the graphics
-  public void moveDomino(Domino domino) {
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("Orientation du domino dans le sens trigonométrique");
-    int orientation = scanner.nextInt();
-    System.out.println("Placement du coté gauche du domino");
-    int[] leftPosition = new int[2];
-    System.out.print("x: ");
-    leftPosition[0] = scanner.nextInt();
-    System.out.print("y: ");
-    leftPosition[1] = scanner.nextInt();
-    while (!placeDomino(domino, leftPosition, orientation)) {
-        System.out.println();
-    }
-    placeDomino(domino, leftPosition, orientation);
-  }
 
   protected int[] getRightPosition(Domino domino, int[] leftPosition, int orientation) {
       int[] rightPosition = new int[2];
@@ -173,13 +117,6 @@ public class Player {
 
   private boolean isEmptyCell(int[] position) {
     return this.kingdom[position[0]][position[1]].getType().equals("Vide");
-  }
-
-  private boolean isGoodPosition(Domino domino, int[] leftPosition, int[] rightPosition, King king)
-  {
-    // Verifier si le cote droit est dans la bonne range
-
-    return true;
   }
 
   protected boolean isSideInside(int[] position) {

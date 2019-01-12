@@ -222,27 +222,6 @@ public class Middle {
     }
   }
 
-
-  public void kingsRound() {
-    Scanner scanner = new Scanner(System.in);
-    for(int i = 0; i<this.kingsFirstPositions.length; i++) {
-      King actualKing = this.kingsFirstPositions[i];
-      System.out.println("Votre roi " + actualKing);
-      Domino domino;
-      do {
-        try {
-          domino = moveKing(actualKing, scanner.nextInt());
-        } catch (InputMismatchException e) {
-          System.out.println("Veuillez entrer un nombre entier");
-          scanner.next();
-          domino = null;
-        }
-      } while(domino == null);
-      actualKing.getPlayer().moveDomino(domino);
-      System.out.println();
-    }
-  }
-
   public void removeFirstKing() {
     for(int i = 0; i<this.kingsSecondPositions.length; i++) {
       King king = this.kingsSecondPositions[i];
