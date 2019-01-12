@@ -168,7 +168,6 @@ public class MiddleRenderer {
 
     public void updateDominos(int mouseX, int mouseY) {
         Domino[][] middle = this.middle.getMiddle();
-        updateColumn(mouseX, mouseY, middle[0], startX, startY);
         updateColumn(mouseX, mouseY, middle[1], startX + 100, startY);
     }
 
