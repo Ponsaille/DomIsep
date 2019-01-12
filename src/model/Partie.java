@@ -111,14 +111,10 @@ public class Partie {
 
 
   public boolean isPlayable() {
-    return players.size() > 1;
+    return (players.size() > 1 && players.size() < 5);
   }
 
   public boolean start() {
-    if(!isPlayable())  {
-      return false;
-    }
-
     this.middle = new Middle(players.size());
 
     // Setting the number of kings per player
