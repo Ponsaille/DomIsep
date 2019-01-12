@@ -29,6 +29,11 @@ public class GameScreen extends BasicGameState {
     }
 
     public void upgrade() {
+        //On s'assure que la partie puisse être jouée sinon on reviens à l'écrant d'accceuil
+        if(!this.partie.start()) {
+            this.game.enterState(MainScreen.ID);
+        }
+
         int[][] positions = {
                 {0,0},
                 {550, 0},
@@ -38,7 +43,6 @@ public class GameScreen extends BasicGameState {
         for(int i = 0; i < partie.getPlayers().size(); i++) {
             this.playerRenderers.add(new PlayerRenderer(partie.getPlayers().get(i), partie, positions[i]));
         }
-        this.partie.start();
         this.middleRenderer = new MiddleRenderer(partie.getMiddle(), this.playerRenderers, this.partie);
     }
 

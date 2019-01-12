@@ -64,7 +64,7 @@ public class MainScreen extends BasicGameState {
                 this.partie.newAI();
                 break;
             case 28:
-                if(this.partie.getPlayers().size() > 1) {
+                if(this.partie.isPlayable()) {
                     List<BasicGameState> screens = ((Game) this.game).getScreens();
                     ((GameScreen) screens.get(1)).upgrade();
                     this.game.enterState(GameScreen.ID);

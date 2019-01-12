@@ -114,7 +114,11 @@ public class Partie {
     return players.size() > 1;
   }
 
-  public void start() {
+  public boolean start() {
+    if(!isPlayable())  {
+      return false;
+    }
+
     this.middle = new Middle(players.size());
 
     // Setting the number of kings per player
@@ -129,7 +133,7 @@ public class Partie {
         break;
       default:
         System.err.println("Le nombre de joueur n'est pas standart");
-        return;
+        return false;
     }
     // Pour éviter d'avoir 2 fois la même couleur
     Color[] disponnibleColors = {Color.black,Color.blue,Color.red,Color.green};
@@ -145,14 +149,7 @@ public class Partie {
 
     this.middle.pick();
     this.middle.sort();
-  }
 
-  public boolean isDone() {
-    for (Player player : players) {
-      if(player.canPlay()) {
-        return true;
-      }
-    }
-    return false;
+    return true;
   }
 }
