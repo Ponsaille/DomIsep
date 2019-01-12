@@ -61,7 +61,10 @@ public class MainScreen extends BasicGameState {
             List<BasicGameState> screens = ((Game) this.game).getScreens();
             ((GameScreen) screens.get(1)).upgrade();
             this.game.enterState(GameScreen.ID);
+        } else if (key == 30) {
+            this.partie.newAI();
         }
+        System.out.println(key);
     }
 
     @Override

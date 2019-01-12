@@ -263,4 +263,14 @@ public class Middle {
       return true;
   }
 
+  public List<Domino> getUnUsedDominos() {
+    List<Domino> results = new ArrayList<>();
+    for(int i = 0; i < nbDominos; i++)  {
+      if(this.kingsSecondPositions[i] == null) {
+        results.add(this.secondColumn.get(i));
+      }
+    }
+    return results;
+  }
+
 }

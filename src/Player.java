@@ -12,23 +12,26 @@ public class Player {
   // Fields
   //
 
-  private Side[][] kingdom;
+  protected Side[][] kingdom;
   private int id;
   private boolean canPlay;
-  private int mostLeftPosition = 4;
-  private int mostRightPosition = 4;
-  private int highestPosition = 4;
-  private int lowestPosition = 4;
+  protected int mostLeftPosition = 4;
+  protected int mostRightPosition = 4;
+  protected int highestPosition = 4;
+  protected int lowestPosition = 4;
+  protected boolean isAI;
    
   //
   // Constructors
   //
   public Player (int id) {
+      this.id = id;
     this.kingdom = new Side[9][9];
     for(int i = 0; i<9; i++) {
       Arrays.fill(this.kingdom[i], new Side("Vide", 0));
     }
     this.kingdom[4][4] = new Side("Chateau", 0);
+    this.isAI = false;
   }
   
   //
@@ -39,6 +42,10 @@ public class Player {
   //
   // Accessor methods
   //}
+
+  public boolean getIsAI() {
+      return isAI;
+    }
 
   /**
    * Get the value of kingdom
@@ -111,39 +118,47 @@ public class Player {
     placeDomino(domino, leftPosition, orientation);
   }
 
+  protected int[] getRightPosition(Domino domino, int[] leftPosition, int orientation) {
+      int[] rightPosition = new int[2];
+      switch (orientation) {
+          case 0:
+              rightPosition[0] = leftPosition[0]+1;
+              rightPosition[1] = leftPosition[1];
+              break;
+          case 1:
+              rightPosition[0] = leftPosition[0];
+              rightPosition[1] = leftPosition[1]-1;
+              break;
+          case 2:
+              rightPosition[0] = leftPosition[0]-1;
+              rightPosition[1] = leftPosition[1];
+              break;
+          case 3:
+              rightPosition[0] = leftPosition[0];
+              rightPosition[1] = leftPosition[1]+1;
+              break;
+          default:
+              System.out.println("L'orientation n'est pas correcte");
+              break;
+      }
+
+      return rightPosition;
+  }
+
+  protected boolean canPlaceAt(Domino domino, int[] leftPosition, int orientation) {
+      int[] rightPosition = getRightPosition(domino, leftPosition, orientation);
+
+      return (isSideInside(leftPosition)
+              && isSideInside(rightPosition)
+              && isEmptyCell(leftPosition)
+              && isEmptyCell(rightPosition)
+              && isValidDominoTypes(domino, leftPosition, rightPosition));
+  }
+
   public boolean placeDomino(Domino domino, int[] leftPosition, int orientation) {
-    int[] rightPosition = new int[2];
-    switch (orientation) {
-      case 0:
-        rightPosition[0] = leftPosition[0]+1;
-        rightPosition[1] = leftPosition[1];
-        break;
-      case 1:
-        rightPosition[0] = leftPosition[0];
-        rightPosition[1] = leftPosition[1]-1;
-        break;
-      case 2:
-        rightPosition[0] = leftPosition[0]-1;
-        rightPosition[1] = leftPosition[1];
-        break;
-      case 3:
-        rightPosition[0] = leftPosition[0];
-        rightPosition[1] = leftPosition[1]+1;
-        break;
-      default:
-        System.out.println("L'orientation n'est pas correcte");
-        break;
-    }
+    int[] rightPosition = getRightPosition(domino, leftPosition, orientation);
 
-      System.out.println(Arrays.toString(leftPosition));
-      System.out.println(Arrays.toString(rightPosition));
-
-    if(isSideInside(leftPosition)
-            && isSideInside(rightPosition)
-            && isEmptyCell(leftPosition)
-            && isEmptyCell(rightPosition)
-            && isValidDominoTypes(domino, leftPosition, rightPosition)
-    ) {
+    if(canPlaceAt(domino, leftPosition, orientation)) {
       this.kingdom[leftPosition[0]][leftPosition[1]] = domino.getLeftSide();
       this.kingdom[rightPosition[0]][rightPosition[1]] = domino.getRightSide();
 
@@ -167,7 +182,7 @@ public class Player {
     return true;
   }
 
-  private boolean isSideInside(int[] position) {
+  protected boolean isSideInside(int[] position) {
     if(position[0] > 8 || position[1] > 8 || position[0] < 0 || position[1] < 0)  {
       return false;
     }
@@ -216,7 +231,7 @@ public class Player {
     return false;
   }
 
-  private boolean isNearSameType(String type, int[] position) {
+  protected boolean isNearSameType(String type, int[] position) {
     int[][] positionsToCheck = {
             {position[0], position[1]+1},
             {position[0]-1, position[1]},
@@ -320,7 +335,7 @@ public class Player {
       return total;
   }
 
-  private void getAdjacents(List<Integer> position, String type, Stack toVisit) {
+  protected void getAdjacents(List<Integer> position, String type, Stack toVisit) {
       int[][] positionsToCheck = {
               {position.get(0), position.get(1)+1},
               {position.get(0)-1, position.get(1)},

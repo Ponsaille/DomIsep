@@ -95,9 +95,36 @@ public class MiddleRenderer {
         g.drawOval(x, y, radius, radius);
     }
 
+    public void update(GameContainer container, StateBasedGame game) {
 
-    public void update(GameContainer container, StateBasedGame game, int delta, int gameState) {
-        Input input = container.getInput();
+        if(this.partie.getGameStage() == 0 || this.partie.getGameStage() == 1 || this.partie.getGameStage() == 3) {
+            for(King king : this.middle.getKings()[0]) {
+                if(king != null) {
+                    if(king.getPlayer().getIsAI()) {
+                        this.handleAI(king);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    private void handleAI(King king) {
+        AI player = (AI) king.getPlayer();
+        List<Domino> unusedDominos = middle.getUnUsedDominos();
+        Domino bestDomino = player.bestDomino(unusedDominos);
+        Domino dominoToPlace = this.middle.moveKing(king, Arrays.asList(this.middle.getMiddle()[1]).indexOf(bestDomino));
+        if(dominoToPlace != null) {
+            int[] data = player.getBestPosition(dominoToPlace);
+            int[] position = {data[0], data[1]};
+            player.placeDomino(dominoToPlace, position, data[2]);
+            /*if(this.partie.getGameStage() == 3) {
+                this.partie.setGameStage(4);
+                this.partie.getMiddle().removeFirstKing();
+            } else {*/
+                this.nullStateEnded();
+            /*}*/
+        }
     }
 
 
@@ -117,8 +144,6 @@ public class MiddleRenderer {
 
     public void updateDomino(int mouseX, int mouseY, Domino domino, int x, int y, int width, int height) {
         if (mouseX > x && mouseX < x + width && mouseY > y && mouseY < y + height) {
-            System.out.println(domino.getLeftSide().getType());
-            System.out.println(domino.getRightSide().getType());
             // Déplacer seulement le premier roi
             for(King king : this.middle.getKings()[0]) {
                 if(king != null) {
@@ -137,7 +162,17 @@ public class MiddleRenderer {
             if(king != null) {
                 Domino dominoToPlace = this.middle.getMiddle()[1][i];
                 System.out.println(dominoToPlace);
-                this.playerRenderers.get(king.getPlayer().getId()).setDominoToPlace(dominoToPlace);
+                //this.playerRenderers.get(king.getPlayer().getId()).setDominoToPlace(dominoToPlace);
+
+                if(king.getPlayer().getIsAI()) {
+                    int[] data = ((AI) king.getPlayer()).getBestPosition(dominoToPlace);
+                    int[] position = {data[0], data[1]};
+                    king.getPlayer().placeDomino(dominoToPlace, position, data[2]);
+                    this.partie.setGameStage(4);
+                    this.partie.getMiddle().removeFirstKing();
+                } else {
+                    this.playerRenderers.get(king.getPlayer().getId()).setDominoToPlace(dominoToPlace);
+                }
                 break;
             }
         }

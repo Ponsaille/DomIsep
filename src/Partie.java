@@ -152,6 +152,14 @@ public class Partie {
     }
   }
 
+  public void newAI() {
+    if(players.size() < 4) {
+      players.add(new AI(players.size()));
+    } else {
+      System.err.println("The maximum players number has alredy been reached");
+    }
+  }
+
 
   /**
    * @param        id

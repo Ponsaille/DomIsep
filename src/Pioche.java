@@ -38,7 +38,7 @@ public class Pioche {
     switch (nbPlayer) {
       case 2:
         this.removeNDominos(24);
-        //this.removeNDominos(40);
+        //this.removeNDominos(36);
         break;
       case 3:
         this.removeNDominos(12);
