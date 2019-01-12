@@ -4,7 +4,7 @@ import org.newdawn.slick.Color;
 import java.io.File;
 import java.util.Arrays;
 
-public class PlayerRenderer {
+public class PlayerRenderer extends Renderer {
     private Player player;
     private Partie partie;
     private int x;
@@ -36,6 +36,9 @@ public class PlayerRenderer {
         this.renderName(g);
         this.renderPoints(g);
         this.renderDominoToPlace(g);
+        if(this.dominoToPlace != null) {
+            this.renderInstructions("Player " + this.player.getId());
+        }
     }
 
     public void renderBoard(Graphics g) {
@@ -67,81 +70,6 @@ public class PlayerRenderer {
                 renderSide(g, domino.getRightSide(), x, y + height, width / 2, height);
                 break;
         }
-    }
-
-    public void renderSide(Graphics g, Side side, int x, int y, int width, int height) {
-        Color color;
-        Image icon = null;
-        switch (side.getType()) {
-            case "Champs":
-                color = Color.yellow;
-                try {
-                    icon = new Image(new File("data/images/types/champs.jpg").getAbsolutePath());
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "Prairie":
-                color = Color.decode("#00FF00");
-                try {
-                    icon = new Image(new File("data/images/types/prairie.jpg").getAbsolutePath());
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "Foret":
-                color = Color.decode("#006400");
-                try {
-                    icon = new Image(new File("data/images/types/foret.jpg").getAbsolutePath());
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "Mer":
-                try {
-                    icon = new Image(new File("data/images/types/mer.jpg").getAbsolutePath());
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
-                color = Color.blue;
-                break;
-            case "Montagne":
-                color = Color.decode("#800000");
-                try {
-                    icon = new Image(new File("data/images/types/montagne.png").getAbsolutePath());
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "Mine":
-                color = Color.gray;
-                try {
-                    icon = new Image(new File("data/images/types/mine.jpg").getAbsolutePath());
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "Chateau":
-                color = Color.white;
-                try {
-                    icon = new Image(new File("data/images/types/chateau.jpg").getAbsolutePath());
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
-                break;
-            default:
-                color = Color.black;
-                break;
-        }
-        g.setColor(color);
-        g.fillRect(x, y, width, height);
-        if(icon != null) {
-            icon.draw(x, y, width, height);
-        }
-        g.setColor(Color.white);
-        g.drawRect(x, y, width, height);
-        g.setColor(Color.black);
-        g.drawString(Integer.toString(side.getCrowns()), x + 1, y + 1);
     }
 
     private void renderName(Graphics g) {

@@ -273,4 +273,13 @@ public class Middle {
     return results;
   }
 
+  public King getFirstKingFirstCol() {
+    for(King king:kingsFirstPositions) {
+      if(king != null) {
+        return king;
+      }
+    }
+    return null;
+  }
+
 }
